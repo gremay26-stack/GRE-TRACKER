@@ -10,7 +10,7 @@
 <meta name="theme-color" content="#15171c">
 <link rel="manifest" href="./manifest.json">
 <link rel="apple-touch-icon" href="./icon-192.png">
-<title>GRE Tracker — Sep 6</title>
+<title>GRE Tracker — 330</title>
 
 <!-- Firebase SDKs (loaded before app script) -->
 <script src="https://www.gstatic.com/firebasejs/9.22.2/firebase-app-compat.js"></script>
@@ -155,6 +155,117 @@
   .logitem .ld{font-weight:800;font-size:13.5px;margin-bottom:4px}
   .logitem .lstats{color:var(--muted);font-size:12px;display:flex;gap:12px;flex-wrap:wrap}
   .logitem .lnote{margin-top:6px;font-size:12.5px;color:#2c2f36}
+
+  /* ── DARK MODE ─────────────────────────────────────────────────── */
+  html[data-dark]{
+    --ink:#e4dfd0;--paper:#1b1e25;--card:#22262f;--line:#2e333f;
+    --muted:#8a909d;--accent:#d96f3a;--accent-soft:#3a1f0f;
+    --good:#2a9e58;--good-soft:#0f2c1c;--mock:#1e1e38;--gate:#b09030;
+    --shadow:0 1px 2px rgba(0,0,0,.35),0 4px 14px rgba(0,0,0,.28);
+  }
+  html[data-dark] nav.tabs{background:rgba(27,30,37,.96)}
+  html[data-dark] .motiv{background:#161920}
+  html[data-dark] .day.done{background:var(--good-soft);border-color:#204830}
+  html[data-dark] .day.mock{background:#1e1e38;border-color:#2e2e55}
+  html[data-dark] .err.due{background:#3a1f0f}
+  html[data-dark] .minibtn{background:#22262f;color:var(--ink)}
+  html[data-dark] .badge.later{background:#22262f;color:var(--muted)}
+  #darkBtn{font-size:15px;border:1px solid var(--line);background:transparent;
+    color:var(--ink);border-radius:8px;padding:4px 9px;cursor:pointer;font-family:inherit}
+
+  /* ── PHASE INDICATOR ───────────────────────────────────────────── */
+  .phase-ind{padding:10px 14px;border-radius:11px;margin-bottom:14px;
+    font-family:"SF Mono",ui-monospace,monospace;font-size:12px;color:#fff;font-weight:700}
+  .phase-ind .pi-sub{opacity:.75;font-size:11px;margin-top:2px}
+  .phase-ind .pi-bar{height:5px;background:rgba(255,255,255,.2);border-radius:999px;margin-top:8px;overflow:hidden}
+  .phase-ind .pi-bar i{display:block;height:100%;background:rgba(255,255,255,.85);border-radius:999px;transition:width .4s}
+
+  /* ── POMODORO ──────────────────────────────────────────────────── */
+  .pom-modes{display:flex;gap:6px;justify-content:center;margin-bottom:10px}
+  .pom-modes button{font-family:"SF Mono",monospace;font-size:11px;border:1px solid var(--line);
+    background:transparent;color:var(--muted);border-radius:6px;padding:3px 10px;cursor:pointer;font-weight:600}
+  .pom-modes button.on{border-color:var(--accent);color:var(--accent)}
+  .pom-wrap{display:flex;flex-direction:column;align-items:center;gap:8px}
+  .pom-svg{width:110px;height:110px;overflow:visible}
+  .pom-time{font-size:30px;font-weight:800;letter-spacing:-1px;font-family:"SF Mono",monospace}
+  .pom-lbl{font-size:10px;text-transform:uppercase;letter-spacing:.12em;color:var(--muted);font-family:"SF Mono",monospace}
+  .pom-btns{display:flex;gap:8px;margin-top:6px}
+  .pom-btns button{font-family:inherit;font-size:13px;font-weight:700;border-radius:8px;
+    padding:8px 16px;cursor:pointer;border:1px solid var(--line);background:var(--paper);color:var(--ink)}
+  .pom-btns .pom-go{background:var(--accent);color:#fff;border-color:var(--accent)}
+  .pom-log{font-size:11.5px;color:var(--muted);text-align:center;margin-top:4px;font-family:"SF Mono",monospace}
+
+  /* ── HEATMAP ───────────────────────────────────────────────────── */
+  .heatmap{display:grid;grid-template-columns:repeat(9,1fr);gap:4px;margin-top:10px}
+  .hm-cell{aspect-ratio:1;border-radius:4px;background:var(--line)}
+  .hm-cell.done{background:var(--good)}
+  .hm-cell.missed{background:#c0392b}
+  .hm-cell.future{opacity:.4}
+  .hm-cell.today{outline:2px solid var(--accent);outline-offset:1px}
+  .hm-cell.mock-day{box-shadow:0 0 0 2px #1a3a6e inset}
+  html[data-dark] .hm-cell.missed{background:#8b2020}
+  .hm-legend{display:flex;gap:11px;margin-top:8px;font-size:11px;color:var(--muted);
+    font-family:"SF Mono",monospace;flex-wrap:wrap;align-items:center}
+  .hm-legend span{display:flex;align-items:center;gap:4px}
+  .hm-sw{width:10px;height:10px;border-radius:2px;display:inline-block;flex-shrink:0}
+
+  /* ── VOCAB FLASHCARDS ──────────────────────────────────────────── */
+  .vg-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:7px;margin-bottom:14px}
+  .vg-btn{border:1px solid var(--line);background:var(--paper);color:var(--ink);
+    border-radius:9px;padding:7px 4px;font-family:inherit;font-size:11px;cursor:pointer;
+    text-align:center;line-height:1.3}
+  .vg-btn.on{background:var(--ink);color:#fff;border-color:var(--ink)}
+  .vg-btn .vg-pct{font-size:9.5px;color:var(--muted);display:block;margin-top:1px}
+  .vg-btn.on .vg-pct{color:rgba(255,255,255,.5)}
+  .flip-outer{perspective:900px;height:180px;margin-bottom:12px;cursor:pointer;-webkit-tap-highlight-color:transparent}
+  .flip-inner{position:relative;width:100%;height:100%;transition:transform .42s;transform-style:preserve-3d}
+  .flip-inner.flipped{transform:rotateY(180deg)}
+  .flip-front,.flip-back{position:absolute;inset:0;border-radius:14px;border:1px solid var(--line);
+    display:flex;flex-direction:column;align-items:center;justify-content:center;
+    backface-visibility:hidden;-webkit-backface-visibility:hidden;padding:18px;text-align:center}
+  .flip-front{background:var(--ink);color:#fff}
+  .flip-back{background:var(--card);transform:rotateY(180deg)}
+  .flip-front .vw{font-size:28px;font-weight:800;margin-bottom:6px}
+  .flip-front .vhint{font-size:10px;opacity:.5;letter-spacing:.12em;text-transform:uppercase;font-family:monospace}
+  .flip-back .vpos{font-size:10px;color:var(--muted);text-transform:uppercase;
+    letter-spacing:.1em;margin-bottom:8px;font-family:monospace}
+  .flip-back .vdef{font-size:14.5px;line-height:1.5;color:var(--ink)}
+  .vocab-acts{display:flex;gap:7px;margin-bottom:10px}
+  .vocab-acts button{flex:1;font-family:inherit;font-size:13px;font-weight:700;
+    padding:9px;border-radius:9px;cursor:pointer;border:1px solid var(--line)}
+  #vBtnM{background:var(--good-soft);color:var(--good);border-color:var(--good)}
+  #vBtnS{background:var(--accent-soft);color:var(--accent);border-color:var(--accent)}
+  #vBtnN{background:var(--paper);color:var(--ink)}
+  .vocab-stats{display:flex;gap:9px;margin-top:10px}
+  .vocab-stats .vs{flex:1;text-align:center;background:var(--paper);border-radius:10px;
+    padding:8px;border:1px solid var(--line)}
+  .vocab-stats .vs .n{font-size:22px;font-weight:800}
+  .vocab-stats .vs .l{font-size:10px;color:var(--muted);text-transform:uppercase;
+    font-family:"SF Mono",monospace;margin-top:1px}
+
+  /* ── AWA ───────────────────────────────────────────────────────── */
+  .awa-entry{background:var(--card);border:1px solid var(--line);border-radius:12px;
+    padding:12px 14px;margin-bottom:9px}
+  .awa-entry .ae-top{display:flex;justify-content:space-between;align-items:baseline;gap:8px;flex-wrap:wrap}
+  .awa-entry .ae-score{font-size:24px;font-weight:800;color:var(--good)}
+  .awa-entry .ae-meta{font-size:12px;color:var(--muted);margin-top:3px}
+
+  /* ── NOTES ─────────────────────────────────────────────────────── */
+  .note-card{background:var(--card);border:1px solid var(--line);border-radius:12px;
+    padding:12px 14px;margin-bottom:9px}
+  .note-card .nt-top{display:flex;justify-content:space-between;align-items:flex-start;gap:8px}
+  .note-card .nt-tag{font-family:"SF Mono",monospace;font-size:10px;text-transform:uppercase;
+    letter-spacing:.08em;padding:2px 7px;border-radius:6px;font-weight:700;white-space:nowrap}
+  .note-card .nt-tag.Formula{background:#dbeafe;color:#1e40af}
+  .note-card .nt-tag.Strategy{background:#fef3c7;color:#92400e}
+  .note-card .nt-tag.Vocab{background:#d1fae5;color:#065f46}
+  .note-card .nt-tag.General{background:var(--paper);color:var(--muted);border:1px solid var(--line)}
+  .note-card .nt-title{font-weight:700;font-size:14px;margin-bottom:4px}
+  .note-card .nt-body{font-size:13px;color:#2c2f36;white-space:pre-wrap;line-height:1.5;margin-top:6px}
+  html[data-dark] .note-card .nt-body{color:#b8bfcc}
+  .note-filter{display:flex;gap:7px;margin-bottom:12px}
+  .note-filter input{flex:1}
+  .note-filter select{width:auto}
 </style>
 </head>
 <body>
@@ -173,14 +284,15 @@
         <button class="signout-btn" onclick="signOut()">sign out</button>
         <span id="syncStatus2" style="font-size:11px;color:var(--muted);font-family:'SF Mono',monospace"></span>
       </div>
+      <button id="darkBtn" onclick="toggleDark()" title="Toggle dark mode">☾</button>
     </div>
     <!-- Live clock -->
     <div id="liveClock" style="font-family:'SF Mono',ui-monospace,Menlo,Consolas,monospace;font-size:12.5px;color:var(--muted);letter-spacing:.04em;margin-bottom:8px;display:flex;justify-content:space-between;align-items:baseline;gap:10px">
       <span id="clkDate">—</span><span id="clkTime" style="font-weight:700;color:var(--ink)">—</span>
     </div>
     <div class="kicker">Full-time prep · GregMat base</div>
-    <h1>The Road to Sep 6</h1>
-    <div class="sub">Jul 6 → Sep 6, 2026 · target 330</div>
+    <h1>The Road to 330</h1>
+    <div class="sub" id="planRangeLabel">Jul 7 → Sep 7, 2026 · target 330</div>
     <div class="countbar" id="countbar"></div>
   </header>
 
@@ -195,18 +307,47 @@
     <button data-tab="log">Daily Log</button>
     <button data-tab="errors">Error Log</button>
     <button data-tab="progress">Progress</button>
+    <button data-tab="vocab">Vocab</button>
+    <button data-tab="awa">AWA</button>
+    <button data-tab="notes">Notes</button>
     <button data-tab="health">Health</button>
     <button data-tab="backup">Backup</button>
   </nav>
 
   <!-- TODAY -->
   <section id="today" class="on">
+    <div id="phaseBar" class="phase-ind" style="background:#2c3e50;display:none"></div>
     <div class="card" id="cdCard" style="padding:16px;margin-bottom:14px">
       <div style="display:flex;justify-content:space-between;align-items:center;gap:10px;flex-wrap:wrap">
         <h3 style="margin:0">Exam countdown</h3>
         <input type="date" id="cdDate" style="width:auto;font-size:13px;padding:6px 9px">
       </div>
       <div id="cdDisplay" style="margin-top:13px"></div>
+    </div>
+    <div class="card" style="margin-bottom:14px">
+      <h3>Pomodoro</h3>
+      <div class="hint">Work blocks auto-log focus time. Notifications fire on break/return.</div>
+      <div class="pom-modes">
+        <button class="on" id="pmode0" onclick="setPomMode(0)">25+5</button>
+        <button id="pmode1" onclick="setPomMode(1)">45+10</button>
+        <button id="pmode2" onclick="setPomMode(2)">50+10</button>
+      </div>
+      <div class="pom-wrap">
+        <svg class="pom-svg" viewBox="0 0 110 110">
+          <circle cx="55" cy="55" r="46" fill="none" stroke="var(--line)" stroke-width="7"/>
+          <circle id="pomRing" cx="55" cy="55" r="46" fill="none"
+            stroke="var(--accent)" stroke-width="7" stroke-linecap="round"
+            stroke-dasharray="289.03" stroke-dashoffset="0"
+            transform="rotate(-90 55 55)"/>
+        </svg>
+        <div class="pom-time" id="pomTime">25:00</div>
+        <div class="pom-lbl" id="pomLbl">Focus</div>
+      </div>
+      <div class="pom-btns">
+        <button class="pom-go" id="pomGoBtn" onclick="pomToggle()">▶ Start</button>
+        <button onclick="pomReset()">↺ Reset</button>
+      </div>
+      <div class="pom-log" id="pomLog"></div>
     </div>
     <h2 class="sec">Today at a glance</h2>
     <div id="todayCard"></div>
@@ -285,7 +426,7 @@
     </div>
     <div class="card streakwrap" style="margin-top:14px">
       <h3>Mock scores</h3>
-      <div class="hint">The only numbers that predict Sep 6.</div>
+      <div class="hint" id="mockPredictHint">The only numbers that predict Sep 7.</div>
       <div id="mockList"></div>
     </div>
     <div class="card">
@@ -295,6 +436,17 @@
           <div class="n" id="pErrOpen">0</div><div class="l">Open</div></div>
         <div class="stat" style="box-shadow:none;border:none;background:var(--paper)">
           <div class="n" id="pErrClosed">0</div><div class="l">Closed</div></div>
+      </div>
+    </div>
+    <div class="card" style="margin-top:14px">
+      <h3>Study heatmap</h3>
+      <div class="hint" id="heatmapHint">63 days Jul 7 → Sep 7. Green = done · Red = missed · Dim = future.</div>
+      <div class="heatmap" id="heatmap"></div>
+      <div class="hm-legend">
+        <span><span class="hm-sw" style="background:var(--good)"></span>Done</span>
+        <span><span class="hm-sw" style="background:#c0392b"></span>Missed</span>
+        <span><span class="hm-sw" style="background:var(--line);opacity:.4"></span>Future</span>
+        <span><span class="hm-sw" style="box-shadow:0 0 0 2px #1a3a6e inset"></span>Mock</span>
       </div>
     </div>
     <div class="card">
@@ -314,6 +466,102 @@
       <div class="hint">Entries from 2 and 7 days ago. Re-solve them cold.</div>
       <div id="recallList"></div>
     </div>
+  </section>
+
+  <!-- VOCAB -->
+  <section id="vocab">
+    <h2 class="sec">Vocabulary flashcards</h2>
+    <div class="card">
+      <h3>Select group</h3>
+      <div class="hint">27 groups · 10 words · 270 total. Struggling words repeat 3× in queue.</div>
+      <div class="vg-grid" id="vgGrid"></div>
+    </div>
+    <div class="card">
+      <div class="flip-outer" onclick="flipCard()">
+        <div class="flip-inner" id="flipInner">
+          <div class="flip-front">
+            <div class="vhint" style="margin-bottom:6px">Tap to flip</div>
+            <div class="vw" id="vWord">—</div>
+            <div class="vhint" id="vGrp"></div>
+          </div>
+          <div class="flip-back">
+            <div class="vpos" id="vPos">—</div>
+            <div class="vdef" id="vDef">—</div>
+          </div>
+        </div>
+      </div>
+      <div class="vocab-acts">
+        <button id="vBtnM" onclick="markVocab('mastered')">✓ Mastered</button>
+        <button id="vBtnS" onclick="markVocab('struggling')">⚡ Struggling</button>
+        <button id="vBtnN" onclick="nextCard()">→ Next</button>
+      </div>
+      <div class="vocab-stats">
+        <div class="vs"><div class="n" id="vMastN">0</div><div class="l">Mastered</div></div>
+        <div class="vs"><div class="n" id="vStrugN">0</div><div class="l">Struggling</div></div>
+        <div class="vs"><div class="n">270</div><div class="l">Total</div></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- AWA -->
+  <section id="awa">
+    <h2 class="sec">AWA tracker</h2>
+    <div class="card">
+      <h3>Log an essay</h3>
+      <div class="hint">Every practice attempt. Average score appears automatically.</div>
+      <div class="grid2">
+        <label class="fld"><span>Date</span><input type="date" id="awaDate"></label>
+        <label class="fld"><span>Type</span>
+          <select id="awaType"><option>Issue</option><option>Argument</option></select></label>
+      </div>
+      <label class="fld"><span>Score (0–6)</span>
+        <input type="number" id="awaScore" min="0" max="6" step="0.5" placeholder="e.g. 4.5"></label>
+      <label class="fld"><span>Prompt (brief)</span>
+        <textarea id="awaPrompt" placeholder="Paste the prompt or a short description"></textarea></label>
+      <label class="fld"><span>Notes — what to fix next time</span>
+        <textarea id="awaNotes" placeholder="Main weakness, structure issue, one fix"></textarea></label>
+      <button class="go" id="awaSave">Log essay</button>
+    </div>
+    <div class="card">
+      <h3>Essay template</h3>
+      <div class="hint">Your reusable AWA structure. Edit freely.</div>
+      <textarea id="awaTemplate" style="min-height:120px" placeholder="Paste your Issue / Argument template here…"></textarea>
+      <button class="go ghost" id="awaTmplSave" style="margin-top:8px">Save template</button>
+    </div>
+    <div class="grid2" style="gap:11px;margin-bottom:14px">
+      <div class="stat"><div class="n" id="awaAvg">—</div><div class="l">Avg score</div></div>
+      <div class="stat"><div class="n" id="awaCount">0</div><div class="l">Essays logged</div></div>
+    </div>
+    <h2 class="sec">Essay log</h2>
+    <div id="awaList"></div>
+  </section>
+
+  <!-- NOTES -->
+  <section id="notes">
+    <h2 class="sec">Notes &amp; formula sheet</h2>
+    <div class="card">
+      <h3>Add a note</h3>
+      <div class="grid2">
+        <label class="fld"><span>Title</span>
+          <input type="text" id="ntTitle" placeholder="e.g. QC plug-in rule, SD formula"></label>
+        <label class="fld"><span>Tag</span>
+          <select id="ntTag"><option>Formula</option><option>Strategy</option>
+            <option>Vocab</option><option>General</option></select></label>
+      </div>
+      <label class="fld"><span>Content</span>
+        <textarea id="ntBody" style="min-height:90px"
+          placeholder="The rule, formula, or concept in your own words"></textarea></label>
+      <button class="go" id="ntSave">Save note</button>
+    </div>
+    <div class="note-filter">
+      <input type="text" id="ntSearch" placeholder="Search notes…" oninput="renderNotes()">
+      <select id="ntFilter" onchange="renderNotes()">
+        <option value="">All tags</option>
+        <option>Formula</option><option>Strategy</option>
+        <option>Vocab</option><option>General</option>
+      </select>
+    </div>
+    <div id="notesList"></div>
   </section>
 
   <!-- HEALTH -->
@@ -361,6 +609,8 @@
       <div class="hint">Your data lives in the cloud (if signed in) and in this browser. Export a copy now and then as an extra safety net.</div>
       <button class="go" id="expBtn">Export my data (download file)</button>
       <div style="height:9px"></div>
+      <button class="go ghost" onclick="exportCSV()">Export mock scores as CSV</button>
+      <div style="height:9px"></div>
       <button class="go ghost" id="impBtn">Import from a backup file</button>
       <input type="file" id="impFile" accept="application/json" style="display:none">
       <div id="backupMsg" style="margin-top:11px;font-size:12.5px;color:var(--muted)"></div>
@@ -405,77 +655,77 @@ const firebaseConfig = {
    ================================================================ */
 const PLAN = [
   {type:'phase',label:'Phase 1 — Arithmetic + Algebra foundation · GM Days 1–9',color:'#2c3e50'},
-  {date:'2026-07-06',tag:'GM Day 1',content:'Arithmetic S1+2: Integers → Prime Factorization.',add:'Vocab G1+2 (double up). QC 10. Error log on.'},
-  {date:'2026-07-07',tag:'GM Day 2',content:'Arithmetic S3+4: Infinitude of Primes → Irrational II.',add:'PrepSwift parallel. Vocab G3.'},
-  {date:'2026-07-08',tag:'GM Day 3',content:'Arithmetic S5+6: Rounding → Fraction/Decimal/Ratio/Percent.',add:'Vocab G4.'},
-  {date:'2026-07-09',tag:'Quiz gate',tagtype:'gate',content:'Arithmetic S7+8 + homework. Arithmetic Fundamentals Quiz — 80% to advance.',add:'Vocab G5. Re-sit on a buffer day if under 80%.'},
-  {date:'2026-07-10',tag:'GM Day 5',content:'Arithmetic S9 + Algebra S10: Variables → Linear Equations. ★ D2 concept-gap zone.',add:'Vocab G6. Write variable = ___ before every NE.'},
-  {date:'2026-07-11',tag:'GM Day 6',content:'Algebra S11+12: Solving 1-Var → Functions 1.',add:'Vocab G7.'},
-  {date:'2026-07-12',tag:'Buffer',content:'Catch-up. Re-sit Arithmetic quiz if needed, or pull Day 7 forward if on track.',add:'Light day by design. Don\'t skip vocab/QC.'},
-  {date:'2026-07-13',tag:'GM Day 7',content:'Algebra S13+14: Functions 2 → Working Against Each Other (skip Sequences first pass).',add:'Vocab G8.'},
-  {date:'2026-07-14',tag:'Quiz gate',tagtype:'gate',content:'Algebra S15+16: Sequences + Series. Algebra Fundamentals Quiz — 80% to advance.',add:'Vocab G9.'},
+  {date:'2026-07-07',tag:'GM Day 1',content:'Arithmetic S1+2: Integers → Prime Factorization.',add:'Vocab G1+2 (double up). QC 10. Error log on.'},
+  {date:'2026-07-08',tag:'GM Day 2',content:'Arithmetic S3+4: Infinitude of Primes → Irrational II.',add:'PrepSwift parallel. Vocab G3.'},
+  {date:'2026-07-09',tag:'GM Day 3',content:'Arithmetic S5+6: Rounding → Fraction/Decimal/Ratio/Percent.',add:'Vocab G4.'},
+  {date:'2026-07-10',tag:'Quiz gate',tagtype:'gate',content:'Arithmetic S7+8 + homework. Arithmetic Fundamentals Quiz — 80% to advance.',add:'Vocab G5. Re-sit on a buffer day if under 80%.'},
+  {date:'2026-07-11',tag:'GM Day 5',content:'Arithmetic S9 + Algebra S10: Variables → Linear Equations. ★ D2 concept-gap zone.',add:'Vocab G6. Write variable = ___ before every NE.'},
+  {date:'2026-07-12',tag:'GM Day 6',content:'Algebra S11+12: Solving 1-Var → Functions 1.',add:'Vocab G7.'},
+  {date:'2026-07-13',tag:'Buffer',content:'Catch-up. Re-sit Arithmetic quiz if needed, or pull Day 7 forward if on track.',add:'Light day by design. Don\'t skip vocab/QC.'},
+  {date:'2026-07-14',tag:'GM Day 7',content:'Algebra S13+14: Functions 2 → Working Against Each Other (skip Sequences first pass).',add:'Vocab G8.'},
+  {date:'2026-07-15',tag:'Quiz gate',tagtype:'gate',content:'Algebra S15+16: Sequences + Series. Algebra Fundamentals Quiz — 80% to advance.',add:'Vocab G9.'},
   {type:'phase',label:'Phase 2 — Data Analysis ★ pulled forward · GM Days 10–14',color:'#922b21'},
-  {date:'2026-07-15',tag:'GM Day 9',content:'Algebra S17+18 (catch-up / reinforcement).',add:'Vocab G10.'},
-  {date:'2026-07-16',tag:'GM Day 10',content:'DA S1+2: Ways to Present Data → SD (simple).',add:'★ DI RULE starts: title → axes → units, every question. Vocab G11.'},
-  {date:'2026-07-17',tag:'GM Day 11',content:'DA S3+4: SD (complex) → Permutations or Combinations?',add:'Vocab G12.'},
-  {date:'2026-07-18',tag:'GM Day 12',content:'DA S5+6 continued. ETS Quant Practice Book DA set 1.',add:'Vocab G13.'},
-  {date:'2026-07-19',tag:'Buffer',content:'Catch-up. Re-sit any quiz under 80%, or pull DA S7+8 forward.',add:'Light day.'},
+  {date:'2026-07-16',tag:'GM Day 9',content:'Algebra S17+18 (catch-up / reinforcement).',add:'Vocab G10.'},
+  {date:'2026-07-17',tag:'GM Day 10',content:'DA S1+2: Ways to Present Data → SD (simple).',add:'★ DI RULE starts: title → axes → units, every question. Vocab G11.'},
+  {date:'2026-07-18',tag:'GM Day 11',content:'DA S3+4: SD (complex) → Permutations or Combinations?',add:'Vocab G12.'},
+  {date:'2026-07-19',tag:'GM Day 12',content:'DA S5+6 continued. ETS Quant Practice Book DA set 1.',add:'Vocab G13.'},
+  {date:'2026-07-20',tag:'Buffer',content:'Catch-up. Re-sit any quiz under 80%, or pull DA S7+8 forward.',add:'Light day.'},
   {type:'phase',label:'Phase 3 — Coordinate Geometry + Geometry · GM Days 13–20',color:'#1a5276'},
-  {date:'2026-07-20',tag:'Quiz gate',tagtype:'gate',content:'DA S7+8: Probability → Normal Distribution. DA Fundamentals Quiz — 80% to advance.',add:'Vocab G14.'},
-  {date:'2026-07-21',tag:'GM Day 14',content:'DA S9+10: catch-up / reinforcement.',add:'Vocab G15.'},
-  {date:'2026-07-22',tag:'GM Day 15',content:'Coord Geo S1+2: xy-plane → Systems of Equations.',add:'Vocab G16.'},
-  {date:'2026-07-23',tag:'Quiz gate',tagtype:'gate',content:'Coord Geo S3: Linear Eq Problems → Graph Shifts. Coord Geo Fundamentals Quiz — 80%.',add:'Vocab G17.'},
-  {date:'2026-07-24',tag:'GM Day 17',content:'Geometry S1+2: Lines → 30-60-90 Triangles.',add:'Vocab G18. Draw + label every figure.'},
-  {date:'2026-07-25',tag:'GM Day 18',content:'Geometry S3+4: 45-45-90 → Length of Arc.',add:'Vocab G19.'},
-  {date:'2026-07-26',tag:'Mock',tagtype:'mock',content:'GregMat Practice Test 1 — first numbers check, low stakes. Full review same day.',add:'Calibration, not judgment. Vocab review only.'},
-  {date:'2026-07-27',tag:'GM Day 19',content:'Geometry S5+6: Archimedes → Rectangular Solid.',add:'Vocab G20.'},
-  {date:'2026-07-28',tag:'Quiz gate',tagtype:'gate',content:'Geometry S7+8: catch-up. Geometry Fundamentals Quiz — 80% to advance.',add:'Vocab G21.'},
+  {date:'2026-07-21',tag:'Quiz gate',tagtype:'gate',content:'DA S7+8: Probability → Normal Distribution. DA Fundamentals Quiz — 80% to advance.',add:'Vocab G14.'},
+  {date:'2026-07-22',tag:'GM Day 14',content:'DA S9+10: catch-up / reinforcement.',add:'Vocab G15.'},
+  {date:'2026-07-23',tag:'GM Day 15',content:'Coord Geo S1+2: xy-plane → Systems of Equations.',add:'Vocab G16.'},
+  {date:'2026-07-24',tag:'Quiz gate',tagtype:'gate',content:'Coord Geo S3: Linear Eq Problems → Graph Shifts. Coord Geo Fundamentals Quiz — 80%.',add:'Vocab G17.'},
+  {date:'2026-07-25',tag:'GM Day 17',content:'Geometry S1+2: Lines → 30-60-90 Triangles.',add:'Vocab G18. Draw + label every figure.'},
+  {date:'2026-07-26',tag:'GM Day 18',content:'Geometry S3+4: 45-45-90 → Length of Arc.',add:'Vocab G19.'},
+  {date:'2026-07-27',tag:'Mock',tagtype:'mock',content:'GregMat Practice Test 1 — first numbers check, low stakes. Full review same day.',add:'Calibration, not judgment. Vocab review only.'},
+  {date:'2026-07-28',tag:'GM Day 19',content:'Geometry S5+6: Archimedes → Rectangular Solid.',add:'Vocab G20.'},
+  {date:'2026-07-29',tag:'Quiz gate',tagtype:'gate',content:'Geometry S7+8: catch-up. Geometry Fundamentals Quiz — 80% to advance.',add:'Vocab G21.'},
   {type:'phase',label:'Phase 4 — Quant Strategy · GM Days 21–28',color:'#6c3483'},
-  {date:'2026-07-29',tag:'GM Day 21',content:'Quant Toolkit S1: Making Deductions → Piece by Piece.',add:'Vocab G22.'},
-  {date:'2026-07-30',tag:'GM Day 22',content:'Quant Toolkit S2+3: Simplifying QC → Calculating Extremes II.',add:'Vocab G23.'},
-  {date:'2026-07-31',tag:'GM Day 23',content:'Quant Toolkit S4+5: Have a System → Sufficient Information.',add:'Vocab G24.'},
-  {date:'2026-08-01',tag:'GM Day 24',content:'Quant Toolkit S6 + Mixed Practice Set 1.',add:'Vocab G25.'},
-  {date:'2026-08-02',tag:'GM Day 25',content:'Quant Toolkit S7+8 + Mixed Practice Set 2.',add:'Vocab G26.'},
-  {date:'2026-08-03',tag:'GM Day 26',content:'Time Management video + Mixed Practice Set 3.',add:'Vocab G27.'},
-  {date:'2026-08-04',tag:'GM Day 27',content:'Four Keys to High Quant + High Verbal + OG Practice Test 1 Quant (timed practice).',add:'All 27 vocab groups reviewed once.'},
-  {date:'2026-08-05',tag:'Curriculum done',tagtype:'gate',content:'Buffer / catch-up. Full error-log review of everything from Month 1.',add:'Curriculum complete. Drilling starts tomorrow.'},
+  {date:'2026-07-30',tag:'GM Day 21',content:'Quant Toolkit S1: Making Deductions → Piece by Piece.',add:'Vocab G22.'},
+  {date:'2026-07-31',tag:'GM Day 22',content:'Quant Toolkit S2+3: Simplifying QC → Calculating Extremes II.',add:'Vocab G23.'},
+  {date:'2026-08-01',tag:'GM Day 23',content:'Quant Toolkit S4+5: Have a System → Sufficient Information.',add:'Vocab G24.'},
+  {date:'2026-08-02',tag:'GM Day 24',content:'Quant Toolkit S6 + Mixed Practice Set 1.',add:'Vocab G25.'},
+  {date:'2026-08-03',tag:'GM Day 25',content:'Quant Toolkit S7+8 + Mixed Practice Set 2.',add:'Vocab G26.'},
+  {date:'2026-08-04',tag:'GM Day 26',content:'Time Management video + Mixed Practice Set 3.',add:'Vocab G27.'},
+  {date:'2026-08-05',tag:'GM Day 27',content:'Four Keys to High Quant + High Verbal + OG Practice Test 1 Quant (timed practice).',add:'All 27 vocab groups reviewed once.'},
+  {date:'2026-08-06',tag:'Curriculum done',tagtype:'gate',content:'Buffer / catch-up. Full error-log review of everything from Month 1.',add:'Curriculum complete. Drilling starts tomorrow.'},
   {type:'phase',label:'Month 2 · Week 5 — full mixed drilling',color:'#1e6b3c'},
-  {date:'2026-08-06',tag:'Drill',content:'Manhattan 5lb mixed: Arithmetic + Algebra, 35Q timed. Redo all open error-log entries.',add:'No new GregMat sessions from here. This is where the score moves.'},
-  {date:'2026-08-07',tag:'Drill',content:'Manhattan 5lb mixed: DA + Geometry, 35Q timed. Big Book QC mental-math, target 29/30.',add:''},
-  {date:'2026-08-08',tag:'Mock',tagtype:'mock',content:'PP PLUS 1 — first ETS-accurate signal. Full conditions, AWA included.',add:'Warm-up only beforehand. No studying.'},
-  {date:'2026-08-09',tag:'Review',content:'PP1 full 6-step review. Build top 3 quant + top 2 verbal leaks.',add:'Vocab: all 27 groups self-quiz.'},
+  {date:'2026-08-07',tag:'Drill',content:'Manhattan 5lb mixed: Arithmetic + Algebra, 35Q timed. Redo all open error-log entries.',add:'No new GregMat sessions from here. This is where the score moves.'},
+  {date:'2026-08-08',tag:'Drill',content:'Manhattan 5lb mixed: DA + Geometry, 35Q timed. Big Book QC mental-math, target 29/30.',add:''},
+  {date:'2026-08-09',tag:'Mock',tagtype:'mock',content:'PP PLUS 1 — first ETS-accurate signal. Full conditions, AWA included.',add:'Warm-up only beforehand. No studying.'},
+  {date:'2026-08-10',tag:'Review',content:'PP1 full 6-step review. Build top 3 quant + top 2 verbal leaks.',add:'Vocab: all 27 groups self-quiz.'},
   {type:'phase',label:'Month 2 · Week 6 — PP1 leak drilling',color:'#1e6b3c'},
-  {date:'2026-08-10',tag:'Drill',content:'PP1 Leak #1: 25Q targeted from error log. KMF Medium sections 1–2.',add:''},
-  {date:'2026-08-11',tag:'Drill',content:'PP1 Leak #2: 25Q targeted. KMF Medium 3–4. RC structure-read, 1 passage.',add:''},
-  {date:'2026-08-12',tag:'Drill',content:'Full mixed timed set, all topics, 30Q. KMF Hard section 1.',add:''},
-  {date:'2026-08-13',tag:'Drill',content:'TC + SE mixed, 20Q. Weakest topic from PP1 gets 20 extra Q.',add:''},
-  {date:'2026-08-14',tag:'Drill',content:'ETS OG mixed practice, real-exam conditions.',add:''},
-  {date:'2026-08-15',tag:'Drill',content:'Full mixed timed set. RC + TC + SE daily block.',add:''},
-  {date:'2026-08-16',tag:'Review',content:'Error log full review. Redo all due entries.',add:'Vocab: aggressive self-quiz, all groups.'},
+  {date:'2026-08-11',tag:'Drill',content:'PP1 Leak #1: 25Q targeted from error log. KMF Medium sections 1–2.',add:''},
+  {date:'2026-08-12',tag:'Drill',content:'PP1 Leak #2: 25Q targeted. KMF Medium 3–4. RC structure-read, 1 passage.',add:''},
+  {date:'2026-08-13',tag:'Drill',content:'Full mixed timed set, all topics, 30Q. KMF Hard section 1.',add:''},
+  {date:'2026-08-14',tag:'Drill',content:'TC + SE mixed, 20Q. Weakest topic from PP1 gets 20 extra Q.',add:''},
+  {date:'2026-08-15',tag:'Drill',content:'ETS OG mixed practice, real-exam conditions.',add:''},
+  {date:'2026-08-16',tag:'Drill',content:'Full mixed timed set. RC + TC + SE daily block.',add:''},
+  {date:'2026-08-17',tag:'Review',content:'Error log full review. Redo all due entries.',add:'Vocab: aggressive self-quiz, all groups.'},
   {type:'phase',label:'Month 2 · Week 7 — hard drilling + Mock 2',color:'#1e6b3c'},
-  {date:'2026-08-17',tag:'Drill',content:'KMF Hard section 2, 15Q, 2:00 hard-stop. Weakest topic +20Q.',add:''},
-  {date:'2026-08-18',tag:'Drill',content:'KMF Hard section 3, 15Q. RC + TC + SE block.',add:''},
-  {date:'2026-08-19',tag:'Drill',content:'KMF Hard section 4, 15Q. ETS OG mixed sets.',add:''},
-  {date:'2026-08-20',tag:'Drill',content:'Full mixed timed set, all topics. Error-log redo.',add:''},
-  {date:'2026-08-21',tag:'Drill',content:'Light mixed set + formula sheet review. Rest before mock.',add:''},
-  {date:'2026-08-22',tag:'Mock',tagtype:'mock',content:'PP PLUS 2 — full conditions. Drives Week 8 targeting.',add:'Warm-up only. No studying beforehand.'},
-  {date:'2026-08-23',tag:'Review',content:'PP2 full 6-step review. Rebuild top leaks list.',add:''},
+  {date:'2026-08-18',tag:'Drill',content:'KMF Hard section 2, 15Q, 2:00 hard-stop. Weakest topic +20Q.',add:''},
+  {date:'2026-08-19',tag:'Drill',content:'KMF Hard section 3, 15Q. RC + TC + SE block.',add:''},
+  {date:'2026-08-20',tag:'Drill',content:'KMF Hard section 4, 15Q. ETS OG mixed sets.',add:''},
+  {date:'2026-08-21',tag:'Drill',content:'Full mixed timed set, all topics. Error-log redo.',add:''},
+  {date:'2026-08-22',tag:'Drill',content:'Light mixed set + formula sheet review. Rest before mock.',add:''},
+  {date:'2026-08-23',tag:'Mock',tagtype:'mock',content:'PP PLUS 2 — full conditions. Drives Week 8 targeting.',add:'Warm-up only. No studying beforehand.'},
+  {date:'2026-08-24',tag:'Review',content:'PP2 full 6-step review. Rebuild top leaks list.',add:''},
   {type:'phase',label:'Month 2 · Week 8 — PP2 leak drilling + Mock 3',color:'#1e6b3c'},
-  {date:'2026-08-24',tag:'Drill',content:'PP2 Leak #1+#2: 25Q each. Redo all open entries from Weeks 5–7.',add:''},
-  {date:'2026-08-25',tag:'Drill',content:'KMF Hard, weakest 2 topics, 20Q each.',add:'Vocab: top-30 hardest words across all groups.'},
-  {date:'2026-08-26',tag:'Drill',content:'Full mixed timed set. RC + TC + SE block.',add:''},
-  {date:'2026-08-27',tag:'Drill',content:'Light mixed + formula sheet from memory, gaps checked.',add:''},
-  {date:'2026-08-28',tag:'Drill',content:'10 confidence Q (D2–D3). Rest before mock.',add:''},
-  {date:'2026-08-29',tag:'Mock',tagtype:'mock',content:'PP PLUS 3 — final readiness check. Full conditions.',add:'Finalise Test-Day Rules (max 5) after review.'},
-  {date:'2026-08-30',tag:'Review',content:'PP3 full review. Top-2 leaks only get fixed next 2 days.',add:''},
+  {date:'2026-08-25',tag:'Drill',content:'PP2 Leak #1+#2: 25Q each. Redo all open entries from Weeks 5–7.',add:''},
+  {date:'2026-08-26',tag:'Drill',content:'KMF Hard, weakest 2 topics, 20Q each.',add:'Vocab: top-30 hardest words across all groups.'},
+  {date:'2026-08-27',tag:'Drill',content:'Full mixed timed set. RC + TC + SE block.',add:''},
+  {date:'2026-08-28',tag:'Drill',content:'Light mixed + formula sheet from memory, gaps checked.',add:''},
+  {date:'2026-08-29',tag:'Drill',content:'10 confidence Q (D2–D3). Rest before mock.',add:''},
+  {date:'2026-08-30',tag:'Mock',tagtype:'mock',content:'PP PLUS 3 — final readiness check. Full conditions.',add:'Finalise Test-Day Rules (max 5) after review.'},
+  {date:'2026-08-31',tag:'Review',content:'PP3 full review. Top-2 leaks only get fixed next 2 days.',add:''},
   {type:'phase',label:'Week 9 — taper',color:'#555555'},
-  {date:'2026-08-31',tag:'Taper',content:'PP3 top-2 leaks only, 15Q each. Last day of anything new.',add:'45 min max.'},
-  {date:'2026-09-01',tag:'Taper',content:'PP3 leak fix #2. Formula sheet read once.',add:'45 min max.'},
-  {date:'2026-09-02',tag:'Taper',content:'Formula sheet + Test-Day Rules: read once each. Vocab top-20.',add:''},
-  {date:'2026-09-03',tag:'Taper',content:'10 easy-medium Q only. Nothing hard. Vocab top-20.',add:''},
-  {date:'2026-09-04',tag:'Taper',content:'5 confidence Q. Read Rules once. Lay out ID + scratch papers.',add:''},
-  {date:'2026-09-05',tag:'Rest',content:'REST. Zero studying. Sleep by 10:30. Two alarms set.',add:'The work is done.'},
-  {date:'2026-09-06',tag:'EXAM',tagtype:'mock',content:'EXAM DAY. Warm-up: 3 easy Q + 2 easy V. Read Test-Day Rules once. Execute.',add:'9 weeks of work are already done.'},
+  {date:'2026-09-01',tag:'Taper',content:'PP3 top-2 leaks only, 15Q each. Last day of anything new.',add:'45 min max.'},
+  {date:'2026-09-02',tag:'Taper',content:'PP3 leak fix #2. Formula sheet read once.',add:'45 min max.'},
+  {date:'2026-09-03',tag:'Taper',content:'Formula sheet + Test-Day Rules: read once each. Vocab top-20.',add:''},
+  {date:'2026-09-04',tag:'Taper',content:'10 easy-medium Q only. Nothing hard. Vocab top-20.',add:''},
+  {date:'2026-09-05',tag:'Taper',content:'5 confidence Q. Read Rules once. Lay out ID + scratch papers.',add:''},
+  {date:'2026-09-06',tag:'Rest',content:'REST. Zero studying. Sleep by 10:30. Two alarms set.',add:'The work is done.'},
+  {date:'2026-09-07',tag:'EXAM',tagtype:'mock',content:'EXAM DAY. Warm-up: 3 easy Q + 2 easy V. Read Test-Day Rules once. Execute.',add:'9 weeks of work are already done.'},
 ];
 
 const MOTIV = [
@@ -488,14 +738,14 @@ const MOTIV = [
  "Plug in 0, a negative, a fraction. The obvious QC answer is the trap.",
  "The loop breaks with one action repeated, not one dramatic day.",
  "Tired and did it anyway > rested and planned it. Today, be the first one.",
- "Future-you on Sep 6 is built by today-you at the desk. Hand him something.",
+ "Future-you on test day is built by today-you at the desk. Hand him something.",
  "No zero days. Fifteen minutes still counts. Just don't let it be nothing.",
  "Your error log is the engine. The redo column is what makes it more than a diary.",
  "Speed is a reflex, not a gift. It comes from timed reps and nowhere else.",
  "You named the loop yourself. Naming it was step one. This is step two.",
  "Discipline you want to pass on someday gets built in yourself first. Starting now.",
  "Don't read for hours. One concept, drill it, move on. Depth comes from doing.",
- "The number on Sep 6 is data, not a verdict. Today's reps are the only input you control.",
+ "The number on test day is data, not a verdict. Today's reps are the only input you control.",
  "Comfort got you here. One uncomfortable hour, on purpose, is how you leave.",
  "Stop evaluating which plan is best. The plan is set. Open it and go.",
  "What you avoid feeling, you act out. Sit with the resistance for 5 minutes, then start anyway."
@@ -512,6 +762,9 @@ state.checks = state.checks || {};
 state.logs   = state.logs   || [];
 state.errors = state.errors || [];
 state.health = state.health || [];
+state.vocab  = state.vocab  || {mastered:[],struggling:[]};
+state.awa    = state.awa    || {entries:[],template:''};
+state.notes  = state.notes  || [];
 
 /* ================================================================
    FIREBASE INIT (graceful — works without config too)
@@ -585,6 +838,9 @@ async function loadCloudData() {
       state.logs   = cloud.logs   || [];
       state.errors = cloud.errors || [];
       state.health = cloud.health || [];
+      state.vocab  = cloud.vocab  || {mastered:[],struggling:[]};
+      state.awa    = cloud.awa    || {entries:[],template:''};
+      state.notes  = cloud.notes  || [];
       _save(state);
       renderAll();
       setCloudStatus('✓ Synced', 2500);
@@ -625,6 +881,33 @@ function addDays(iso,n) {
   return d.getFullYear() + '-' + String(d.getMonth()+1).padStart(2,'0') + '-' + String(d.getDate()).padStart(2,'0');
 }
 const planDays = PLAN.filter(p => !p.type);
+const PLAN_START = '2026-07-07';
+const DEFAULT_EXAM_DATE = '2026-09-07';
+
+function daysInclusive(startIso, endIso) {
+  return Math.max(0, Math.round((new Date(endIso+'T00:00:00') - new Date(startIso+'T00:00:00')) / 864e5) + 1);
+}
+function fmtMonthDay(iso) {
+  if (!iso) return '';
+  const [y,m,d] = iso.split('-');
+  const mo = ['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'][+m-1];
+  return mo + ' ' + (+d);
+}
+function fmtRange(startIso, endIso) {
+  if (!startIso || !endIso) return '';
+  const sy = startIso.slice(0,4), ey = endIso.slice(0,4);
+  if (sy === ey) return fmtMonthDay(startIso) + ' → ' + fmtMonthDay(endIso) + ', ' + ey;
+  return fmtMonthDay(startIso) + ', ' + sy + ' → ' + fmtMonthDay(endIso) + ', ' + ey;
+}
+function renderDynamicDateLabels() {
+  const exam = getExamDate();
+  const rangeEl = document.getElementById('planRangeLabel');
+  const mockEl = document.getElementById('mockPredictHint');
+  const heatEl = document.getElementById('heatmapHint');
+  if (rangeEl) rangeEl.textContent = fmtRange(PLAN_START, exam) + ' · target 330';
+  if (mockEl) mockEl.textContent = 'The only numbers that predict ' + fmtMonthDay(exam) + '.';
+  if (heatEl) heatEl.textContent = daysInclusive(PLAN_START, exam) + ' days ' + fmtMonthDay(PLAN_START) + ' → ' + fmtMonthDay(exam) + '. Green = done · Red = missed · Dim = future.';
+}
 
 /* ================================================================
    AUTO BACKUP + SAVE CHAIN
@@ -650,7 +933,7 @@ function setMotiv() {
    ================================================================ */
 function setCount() {
   const t = todayISO();
-  const start = '2026-07-06', exam = '2026-09-06';
+  const start = PLAN_START, exam = getExamDate();
   let daysToExam = Math.round((new Date(exam)-new Date(t))/864e5);
   const done = Object.values(state.checks).filter(Boolean).length;
   let label;
@@ -843,6 +1126,7 @@ function doImport(file) {
     const inc = JSON.parse(r.result);
     if (!inc || typeof inc !== 'object') throw 0;
     state.checks=inc.checks||{}; state.logs=inc.logs||[]; state.errors=inc.errors||[]; state.health=inc.health||[];
+    state.vocab=inc.vocab||{mastered:[],struggling:[]}; state.awa=inc.awa||{entries:[],template:''}; state.notes=inc.notes||[];
     save(state); renderAll();
     $('#backupMsg').textContent = 'Imported successfully — your data is restored.';
   } catch(e) { $('#backupMsg').textContent = 'That file could not be read. Make sure it\'s a backup from this app.'; }};
@@ -942,8 +1226,8 @@ function renderTodayFlag() {
    EXAM COUNTDOWN
    ================================================================ */
 const CDKEY = 'gretracker_examdate';
-function getExamDate() { return localStorage.getItem(CDKEY) || '2026-09-06'; }
-function setExamDate(d) { localStorage.setItem(CDKEY, d); }
+function getExamDate() { return localStorage.getItem(CDKEY) || DEFAULT_EXAM_DATE; }
+function setExamDate(d) { if (d) localStorage.setItem(CDKEY, d); }
 function renderCountdown() {
   const inp = document.getElementById('cdDate'), box = document.getElementById('cdDisplay');
   if (!inp || !box) return;
@@ -961,7 +1245,8 @@ function renderCountdown() {
   else if (totalH > 10*24) { color='#8a6d1f'; sub='Core phase. Protect every day.'; }
   else if (totalH > 3*24)  { color='#b3471f'; sub='Final stretch. Drill and review only.'; }
   else                 { color='#922b21'; sub='Taper. Rest, rules, light reps.'; }
-  const pct = Math.max(4, Math.min(100, Math.round((1 - totalH/(63*24))*100)));
+  const totalDays = Math.max(1, daysInclusive(PLAN_START, getExamDate()));
+  const pct = Math.max(4, Math.min(100, Math.round((1 - totalH/(totalDays*24))*100)));
   box.innerHTML = `
     <div style="display:flex;gap:18px;align-items:flex-end">
       <div><div style="font-size:38px;font-weight:800;line-height:1;color:${color}">${days}</div>
@@ -1066,7 +1351,7 @@ $('#tabs').querySelectorAll('button').forEach(b => {
 $('#resetBtn').onclick = () => {
   if (confirm('Erase all data on this device? Cloud copy (if signed in) is not affected — re-open to restore from cloud.')) {
     localStorage.removeItem(KEY); state=load();
-    state.checks={}; state.logs=[]; state.errors=[]; state.health=[]; save(state); renderAll();
+    state.checks={}; state.logs=[]; state.errors=[]; state.health=[]; state.vocab={mastered:[],struggling:[]}; state.awa={entries:[],template:''}; state.notes=[]; save(state); renderAll();
   }
 };
 
@@ -1088,6 +1373,7 @@ document.getElementById('restoreAuto').onclick = () => {
     const b = JSON.parse(localStorage.getItem(AKEY));
     if (b&&b.data) {
       state.checks=b.data.checks||{}; state.logs=b.data.logs||[]; state.errors=b.data.errors||[]; state.health=b.data.health||[];
+      state.vocab=b.data.vocab||{mastered:[],struggling:[]}; state.awa=b.data.awa||{entries:[],template:''}; state.notes=b.data.notes||[];
       _save(state); renderAll();
       document.getElementById('backupMsg').textContent='Restored from last auto-backup.';
       document.querySelector('[data-tab=backup]').click();
@@ -1100,7 +1386,7 @@ document.getElementById('restoreAuto').onclick = () => {
    ================================================================ */
 (function(){
   const cd = document.getElementById('cdDate');
-  if (cd) { cd.value=getExamDate(); cd.onchange=()=>{setExamDate(cd.value); renderCountdown();}; }
+  if (cd) { cd.value=getExamDate(); cd.onchange=()=>{setExamDate(cd.value); renderAll();}; }
 })();
 document.getElementById('hDate').value = todayISO();
 
@@ -1119,12 +1405,608 @@ function tickClock() {
 tickClock(); setInterval(tickClock,1000);
 
 function renderAll() {
-  setMotiv(); setCount(); renderCountdown(); renderToday(); renderTodayFlag();
+  renderDynamicDateLabels(); setMotiv(); setCount(); renderCountdown(); renderToday(); renderTodayFlag();
   renderPlan(); renderLogList(); renderErrors(); renderProgress();
   renderMockChart(); renderErrAnalytics(); renderRecall(); renderAuto(); renderHealth();
+  renderPhase(); renderHeatmap(); renderVocabStats(); renderAWA(); renderNotes();
 }
+
+/* ================================================================
+   DARK MODE
+   ================================================================ */
+function toggleDark(){
+  var html=document.documentElement, btn=document.getElementById('darkBtn');
+  if(html.hasAttribute('data-dark')){html.removeAttribute('data-dark');localStorage.setItem('gretracker_dark','0');if(btn)btn.textContent='\u263e';}
+  else{html.setAttribute('data-dark','');localStorage.setItem('gretracker_dark','1');if(btn)btn.textContent='\u2600';}
+}
+if(localStorage.getItem('gretracker_dark')==='1'){document.documentElement.setAttribute('data-dark','');var _db=document.getElementById('darkBtn');if(_db)_db.textContent='\u2600';}
+
+/* ================================================================
+   PHASE INDICATOR
+   ================================================================ */
+var PHASES=[
+  {label:'Phase 1 — Arithmetic + Algebra',color:'#2c3e50',start:'2026-07-07',end:'2026-07-15'},
+  {label:'Phase 2 — Data Analysis',color:'#922b21',start:'2026-07-16',end:'2026-07-20'},
+  {label:'Phase 3 — Coord Geo + Geometry',color:'#1a5276',start:'2026-07-21',end:'2026-07-29'},
+  {label:'Phase 4 — Quant Strategy',color:'#6c3483',start:'2026-07-30',end:'2026-08-06'},
+  {label:'Month 2 — Drilling & Mocks',color:'#1e6b3c',start:'2026-08-07',end:'2026-08-31'},
+  {label:'Week 9 — Taper',color:'#555555',start:'2026-09-01',end:'2026-09-07'},
+];
+function renderPhase(){
+  var bar=document.getElementById('phaseBar');if(!bar)return;
+  var t=todayISO(),ph=null;
+  for(var i=0;i<PHASES.length;i++){
+    var pEnd = PHASES[i].label.indexOf('Taper')>-1 ? getExamDate() : PHASES[i].end;
+    if(t>=PHASES[i].start&&t<=pEnd){ph=Object.assign({},PHASES[i],{end:pEnd});break;}
+  }
+  if(!ph){bar.style.display='none';return;}
+  var total=Math.round((new Date(ph.end)-new Date(ph.start))/864e5)+1;
+  var day=Math.round((new Date(t)-new Date(ph.start))/864e5)+1;
+  var pct=Math.min(100,Math.round(day/total*100));
+  bar.style.display='';bar.style.background=ph.color;
+  bar.innerHTML='<div>'+ph.label+'</div><div class="pi-sub">Day '+day+' of '+total+' \u00b7 '+pct+'% complete</div><div class="pi-bar"><i style="width:'+pct+'%"></i></div>';
+}
+
+/* ================================================================
+   HEATMAP
+   ================================================================ */
+var MOCK_DAYS={};['2026-07-27','2026-08-09','2026-08-23','2026-08-30'].forEach(function(d){MOCK_DAYS[d]=1;});
+function renderHeatmap(){
+  var box=document.getElementById('heatmap');if(!box)return;
+  var t=todayISO(),cells='',d=PLAN_START,end=getExamDate();
+  while(d<=end){
+    var done=!!state.checks[d],isToday=d===t,isMock=!!MOCK_DAYS[d];
+    var cls='hm-cell';
+    if(d>=t)cls+=' future';
+    else cls+=done?' done':' missed';
+    if(isToday)cls+=' today';
+    if(isMock)cls+=' mock-day';
+    cells+='<div class="'+cls+'" title="'+d+'"></div>';
+    d=addDays(d,1);
+  }
+  box.innerHTML=cells;
+}
+
+/* ================================================================
+   POMODORO
+   ================================================================ */
+var POM=[{w:25,b:5},{w:45,b:10},{w:50,b:10}];
+var pomMode=0,pomPhase='work',pomLeft=1500,pomOn=false,pomTick=null,pomDayMin=0;
+function setPomMode(i){
+  if(pomOn){clearInterval(pomTick);pomOn=false;}
+  pomMode=i;pomPhase='work';pomLeft=POM[i].w*60;
+  for(var j=0;j<3;j++)document.getElementById('pmode'+j).classList.toggle('on',j===i);
+  updatePomUI();
+}
+function pomToggle(){
+  if(pomOn){clearInterval(pomTick);pomOn=false;var b=document.getElementById('pomGoBtn');if(b)b.textContent='\u25b6 Start';}
+  else{
+    pomOn=true;var b=document.getElementById('pomGoBtn');if(b)b.textContent='\u23f8 Pause';
+    if(window.Notification&&Notification.permission==='default')Notification.requestPermission();
+    pomTick=setInterval(function(){
+      pomLeft--;
+      if(pomLeft<=0){
+        clearInterval(pomTick);pomOn=false;var b=document.getElementById('pomGoBtn');if(b)b.textContent='\u25b6 Start';
+        if(pomPhase==='work'){
+          pomDayMin+=POM[pomMode].w;updatePomLog();
+          pomPhase='break';pomLeft=POM[pomMode].b*60;
+          pomNotify('Break time',POM[pomMode].b+' min. Stand up, stretch.');
+        }else{
+          pomPhase='work';pomLeft=POM[pomMode].w*60;
+          pomNotify('Back to work','Next focus block starting.');
+        }
+      }else{pomLeft--;}
+      updatePomUI();
+    },1000);
+  }
+  updatePomUI();
+}
+function pomReset(){clearInterval(pomTick);pomOn=false;pomPhase='work';pomLeft=POM[pomMode].w*60;var b=document.getElementById('pomGoBtn');if(b)b.textContent='\u25b6 Start';updatePomUI();}
+function pomNotify(title,body){if(window.Notification&&Notification.permission==='granted')new Notification(title,{body:body,icon:'./icon-192.png'});}
+function updatePomUI(){
+  var m=Math.floor(pomLeft/60),s=pomLeft%60;
+  var tEl=document.getElementById('pomTime'),lEl=document.getElementById('pomLbl'),ring=document.getElementById('pomRing');
+  if(tEl)tEl.textContent=(m<10?'0':'')+m+':'+(s<10?'0':'')+s;
+  if(lEl)lEl.textContent=pomPhase==='work'?'Focus':'Break';
+  var total=(pomPhase==='work'?POM[pomMode].w:POM[pomMode].b)*60;
+  var offset=total>0?289.03*(pomLeft/total):0;
+  if(ring){ring.setAttribute('stroke-dashoffset',offset);ring.setAttribute('stroke',pomPhase==='work'?'var(--accent)':'var(--good)');}
+  if(tEl)tEl.style.color=pomPhase==='work'?'var(--accent)':'var(--good)';
+}
+function updatePomLog(){var el=document.getElementById('pomLog');if(el)el.textContent=pomDayMin+' focus min this session';}
+updatePomUI();
+
+/* ================================================================
+   VOCABULARY  27 × 10 = 270 words
+   ================================================================ */
+var VOCAB=[
+  {g:'G1 \u00b7 Destruction',w:[
+    {w:'vitiate',p:'v',d:'to impair or corrupt the quality of'},
+    {w:'enervate',p:'v',d:'to drain of energy or vitality; weaken'},
+    {w:'debilitate',p:'v',d:'to make weak, especially through illness'},
+    {w:'attenuate',p:'v',d:'to reduce in force, value, or density'},
+    {w:'deplete',p:'v',d:'to use up the supply of; exhaust'},
+    {w:'erode',p:'v',d:'to gradually destroy or wear away'},
+    {w:'mitigate',p:'v',d:'to make less severe or painful'},
+    {w:'assuage',p:'v',d:'to make an unpleasant feeling less intense'},
+    {w:'abate',p:'v',d:'to become less intense or widespread'},
+    {w:'ameliorate',p:'v',d:'to make a bad situation better'},
+  ]},
+  {g:'G2 \u00b7 Praise',w:[
+    {w:'laud',p:'v',d:'to praise highly, especially in public'},
+    {w:'extol',p:'v',d:'to praise enthusiastically'},
+    {w:'eulogize',p:'v',d:'to speak or write in high praise of'},
+    {w:'encomium',p:'n',d:'a speech expressing high praise'},
+    {w:'panegyric',p:'n',d:'a public tribute or written praise'},
+    {w:'plaudit',p:'n',d:'an expression of praise or approval'},
+    {w:'acclaim',p:'n/v',d:'enthusiastic public praise'},
+    {w:'approbation',p:'n',d:'formal approval or praise'},
+    {w:'venerate',p:'v',d:'to regard with great respect and reverence'},
+    {w:'lionize',p:'v',d:'to treat someone as important or famous'},
+  ]},
+  {g:'G3 \u00b7 Criticism',w:[
+    {w:'censure',p:'v/n',d:'to express severe disapproval of'},
+    {w:'castigate',p:'v',d:'to reprimand someone severely'},
+    {w:'excoriate',p:'v',d:'to criticize someone harshly and at length'},
+    {w:'lambaste',p:'v',d:'to criticize someone harshly'},
+    {w:'reprove',p:'v',d:'to rebuke; express disapproval of'},
+    {w:'upbraid',p:'v',d:'to scold or reproach angrily'},
+    {w:'admonish',p:'v',d:'to warn or reprimand someone firmly'},
+    {w:'impugn',p:'v',d:'to dispute the truth or validity of'},
+    {w:'inveigh',p:'v',d:'to speak or write with strong hostility'},
+    {w:'chide',p:'v',d:'to scold or rebuke mildly'},
+  ]},
+  {g:'G4 \u00b7 Deception',w:[
+    {w:'duplicitous',p:'adj',d:'deceitful in speech or conduct'},
+    {w:'mendacious',p:'adj',d:'not telling the truth; lying'},
+    {w:'perfidious',p:'adj',d:'deceitful and untrustworthy; treacherous'},
+    {w:'dissemble',p:'v',d:'to conceal one\'s true motives or feelings'},
+    {w:'prevaricate',p:'v',d:'to speak or act evasively'},
+    {w:'equivocate',p:'v',d:'to use ambiguous language to conceal the truth'},
+    {w:'chicanery',p:'n',d:'the use of trickery to achieve goals'},
+    {w:'guile',p:'n',d:'sly or cunning intelligence; deceitfulness'},
+    {w:'subterfuge',p:'n',d:'deceit used in order to achieve a goal'},
+    {w:'specious',p:'adj',d:'superficially plausible but actually wrong'},
+  ]},
+  {g:'G5 \u00b7 Abundance',w:[
+    {w:'plethora',p:'n',d:'a large or excessive amount of something'},
+    {w:'surfeit',p:'n',d:'an excessive amount; too much of something'},
+    {w:'profusion',p:'n',d:'a plentiful or abundant supply'},
+    {w:'paucity',p:'n',d:'the presence of something in only small amounts'},
+    {w:'dearth',p:'n',d:'a scarcity or lack of something'},
+    {w:'exiguous',p:'adj',d:'very small in size or amount'},
+    {w:'meager',p:'adj',d:'lacking in quantity or richness; scanty'},
+    {w:'sparse',p:'adj',d:'thinly dispersed or scattered'},
+    {w:'penury',p:'n',d:'extreme poverty; scarcity of something'},
+    {w:'cornucopia',p:'n',d:'an abundant supply of good things'},
+  ]},
+  {g:'G6 \u00b7 Clarity',w:[
+    {w:'pellucid',p:'adj',d:'translucently clear; easily understood'},
+    {w:'lucid',p:'adj',d:'expressed clearly; easy to understand'},
+    {w:'perspicuous',p:'adj',d:'clearly expressed and easily understood'},
+    {w:'limpid',p:'adj',d:'clear and transparent; free from obscurity'},
+    {w:'abstruse',p:'adj',d:'difficult to understand; obscure'},
+    {w:'recondite',p:'adj',d:'not known by many; abstruse and obscure'},
+    {w:'arcane',p:'adj',d:'understood by few; mysterious or secret'},
+    {w:'esoteric',p:'adj',d:'intended for a small group with special knowledge'},
+    {w:'opaque',p:'adj',d:'not transparent; difficult to understand'},
+    {w:'nebulous',p:'adj',d:'unclear, vague, or ill-defined'},
+  ]},
+  {g:'G7 \u00b7 Speed',w:[
+    {w:'alacrity',p:'n',d:'brisk and cheerful readiness'},
+    {w:'celerity',p:'n',d:'swiftness of movement or action'},
+    {w:'expedite',p:'v',d:'to make an action or process happen sooner'},
+    {w:'precipitate',p:'v/adj',d:'to cause to happen suddenly; done rashly'},
+    {w:'perfunctory',p:'adj',d:'carried out with minimum effort; routine'},
+    {w:'desultory',p:'adj',d:'lacking a plan or purpose; half-hearted'},
+    {w:'dilatory',p:'adj',d:'slow to act; intended to cause delay'},
+    {w:'tardy',p:'adj',d:'late or delayed; slow in moving'},
+    {w:'sluggish',p:'adj',d:'slow-moving; lacking energy or alertness'},
+    {w:'dispatch',p:'n',d:'efficiency and speed in completing a task'},
+  ]},
+  {g:'G8 \u00b7 Support',w:[
+    {w:'buttress',p:'v/n',d:'to support or strengthen'},
+    {w:'bolster',p:'v',d:'to support or strengthen; prop up'},
+    {w:'corroborate',p:'v',d:'to confirm or give support to a statement'},
+    {w:'substantiate',p:'v',d:'to provide evidence to support a claim'},
+    {w:'gainsay',p:'v',d:'to deny or contradict'},
+    {w:'refute',p:'v',d:'to prove a statement or person wrong'},
+    {w:'rebut',p:'v',d:'to counter with evidence; contradict'},
+    {w:'repudiate',p:'v',d:'to refuse to accept; deny the truth of'},
+    {w:'negate',p:'v',d:'to nullify or make ineffective'},
+    {w:'contravene',p:'v',d:'to conflict with or violate a rule'},
+  ]},
+  {g:'G9 \u00b7 Change',w:[
+    {w:'immutable',p:'adj',d:'unchanging over time; unable to be changed'},
+    {w:'inveterate',p:'adj',d:'having a habit firmly established over time'},
+    {w:'entrenched',p:'adj',d:'firmly established and difficult to change'},
+    {w:'mercurial',p:'adj',d:'subject to sudden or unpredictable mood changes'},
+    {w:'volatile',p:'adj',d:'liable to change rapidly and unpredictably'},
+    {w:'protean',p:'adj',d:'tending to change frequently; versatile'},
+    {w:'mutable',p:'adj',d:'liable to change; not fixed or permanent'},
+    {w:'inconstant',p:'adj',d:'frequently changing; not faithful or reliable'},
+    {w:'ephemeral',p:'adj',d:'lasting for only a very short time'},
+    {w:'transient',p:'adj',d:'lasting only for a short time; impermanent'},
+  ]},
+  {g:'G10 \u00b7 Intelligence',w:[
+    {w:'sagacious',p:'adj',d:'having or showing keen mental discernment'},
+    {w:'perspicacious',p:'adj',d:'having a ready insight into things; shrewd'},
+    {w:'astute',p:'adj',d:'having the ability to assess situations accurately'},
+    {w:'erudite',p:'adj',d:'having or showing great knowledge or learning'},
+    {w:'obtuse',p:'adj',d:'annoyingly slow to understand; insensitive'},
+    {w:'fatuous',p:'adj',d:'silly and pointless; lacking intelligence'},
+    {w:'vacuous',p:'adj',d:'showing a lack of thought or intelligence'},
+    {w:'inane',p:'adj',d:'lacking sense or meaning; silly'},
+    {w:'vapid',p:'adj',d:'offering nothing stimulating; bland and dull'},
+    {w:'banal',p:'adj',d:'so lacking in originality as to be boring'},
+  ]},
+  {g:'G11 \u00b7 Generosity',w:[
+    {w:'munificent',p:'adj',d:'more than sufficiently generous'},
+    {w:'magnanimous',p:'adj',d:'generous or forgiving, especially to a rival'},
+    {w:'philanthropic',p:'adj',d:'seeking to promote the welfare of others'},
+    {w:'altruistic',p:'adj',d:'showing disinterested concern for others'},
+    {w:'parsimonious',p:'adj',d:'unwilling to spend money or use resources'},
+    {w:'miserly',p:'adj',d:'unwilling to spend money; stingy'},
+    {w:'niggardly',p:'adj',d:'ungenerous with money; meager in amount'},
+    {w:'frugal',p:'adj',d:'sparing or economical with money or resources'},
+    {w:'prodigal',p:'adj',d:'spending money recklessly; wastefully extravagant'},
+    {w:'largesse',p:'n',d:'generosity in bestowing money or gifts'},
+  ]},
+  {g:'G12 \u00b7 Ambiguity',w:[
+    {w:'ambiguous',p:'adj',d:'open to more than one interpretation'},
+    {w:'equivocal',p:'adj',d:'uncertain or questionable; open to interpretation'},
+    {w:'enigmatic',p:'adj',d:'difficult to interpret or understand'},
+    {w:'cryptic',p:'adj',d:'having a mysterious or unclear meaning'},
+    {w:'explicit',p:'adj',d:'stated clearly and in detail; leaving no doubt'},
+    {w:'unambiguous',p:'adj',d:'not open to more than one interpretation'},
+    {w:'definitive',p:'adj',d:'providing a firm, authoritative conclusion'},
+    {w:'categorical',p:'adj',d:'without conditions or exceptions; absolute'},
+    {w:'provisional',p:'adj',d:'arranged for the present; possibly to change'},
+    {w:'tenuous',p:'adj',d:'very weak or slight; insubstantial'},
+  ]},
+  {g:'G13 \u00b7 Emotion',w:[
+    {w:'sanguine',p:'adj',d:'optimistic, especially in a bad situation'},
+    {w:'phlegmatic',p:'adj',d:'having a calm, unemotional disposition'},
+    {w:'melancholic',p:'adj',d:'having or expressing deep sadness'},
+    {w:'choleric',p:'adj',d:'bad-tempered or irritable; easily angered'},
+    {w:'imperturbable',p:'adj',d:'unable to be upset or excited; calm'},
+    {w:'lachrymose',p:'adj',d:'tearful or given to weeping'},
+    {w:'maudlin',p:'adj',d:'self-pityingly or tearfully sentimental'},
+    {w:'ebullient',p:'adj',d:'cheerful and full of energy'},
+    {w:'effusive',p:'adj',d:'expressing feelings in an unrestrained way'},
+    {w:'stoic',p:'adj',d:'enduring pain or hardship without complaint'},
+  ]},
+  {g:'G14 \u00b7 Courage',w:[
+    {w:'intrepid',p:'adj',d:'fearless and adventurous; bold'},
+    {w:'dauntless',p:'adj',d:'showing fearlessness; not intimidated'},
+    {w:'audacious',p:'adj',d:'showing a willingness to take bold risks'},
+    {w:'valiant',p:'adj',d:'possessing or showing courage in danger'},
+    {w:'trepidation',p:'n',d:'a feeling of fear or anxiety about something'},
+    {w:'pusillanimous',p:'adj',d:'showing a lack of courage; cowardly'},
+    {w:'craven',p:'adj',d:'contemptibly lacking in courage; cowardly'},
+    {w:'timorous',p:'adj',d:'showing nervousness or a lack of confidence'},
+    {w:'diffident',p:'adj',d:'modest or shy due to lack of self-confidence'},
+    {w:'umbrage',p:'n',d:'offense or annoyance taken at something'},
+  ]},
+  {g:'G15 \u00b7 Order',w:[
+    {w:'anarchy',p:'n',d:'a state of disorder due to absence of authority'},
+    {w:'pandemonium',p:'n',d:'wild and noisy disorder or confusion'},
+    {w:'bedlam',p:'n',d:'a scene of great confusion and uproar'},
+    {w:'turmoil',p:'n',d:'a state of great disturbance or uncertainty'},
+    {w:'equanimity',p:'n',d:'mental calmness in difficult situations'},
+    {w:'serenity',p:'n',d:'the state of being calm, peaceful, and untroubled'},
+    {w:'placid',p:'adj',d:'not easily upset or excited; calm and peaceful'},
+    {w:'composure',p:'n',d:'calmness or repose, especially under stress'},
+    {w:'aplomb',p:'n',d:'self-confidence and assurance in difficulty'},
+    {w:'tranquility',p:'n',d:'the quality or state of being calm and peaceful'},
+  ]},
+  {g:'G16 \u00b7 Increase',w:[
+    {w:'augment',p:'v',d:'to make something greater by adding to it'},
+    {w:'amplify',p:'v',d:'to increase in volume, size, or significance'},
+    {w:'burgeon',p:'v',d:'to begin to grow or increase rapidly'},
+    {w:'proliferate',p:'v',d:'to increase rapidly in number or spread widely'},
+    {w:'curtail',p:'v',d:'to reduce in extent, quantity, or scope'},
+    {w:'retrench',p:'v',d:'to reduce costs or expenditure'},
+    {w:'abridge',p:'v',d:'to shorten a text without losing key meaning'},
+    {w:'exacerbate',p:'v',d:'to make a problem or bad situation worse'},
+    {w:'wane',p:'v',d:'to decrease in vigor, power, or extent'},
+    {w:'aggravate',p:'v',d:'to make worse or more serious'},
+  ]},
+  {g:'G17 \u00b7 Memory',w:[
+    {w:'reminisce',p:'v',d:'to indulge in enjoyable recollection of past events'},
+    {w:'nostalgia',p:'n',d:'a sentimental longing or affection for the past'},
+    {w:'commemorate',p:'v',d:'to recall and show respect for in a ceremony'},
+    {w:'efface',p:'v',d:'to erase or obliterate from the mind'},
+    {w:'expunge',p:'v',d:'to erase or remove completely'},
+    {w:'obliterate',p:'v',d:'to destroy utterly; leave no trace of'},
+    {w:'indelible',p:'adj',d:'unable to be forgotten or removed'},
+    {w:'oblivion',p:'n',d:'the state of being forgotten or unaware'},
+    {w:'amnesia',p:'n',d:'a partial or total loss of memory'},
+    {w:'recollect',p:'v',d:'to remember or call to mind'},
+  ]},
+  {g:'G18 \u00b7 Authority',w:[
+    {w:'deference',p:'n',d:'humble submission and respect to another'},
+    {w:'obsequious',p:'adj',d:'excessively obedient or attentive; fawning'},
+    {w:'subservient',p:'adj',d:'too eager to obey; of less importance'},
+    {w:'sycophantic',p:'adj',d:'using excessive flattery to gain favor'},
+    {w:'imperious',p:'adj',d:'assuming power without justification; domineering'},
+    {w:'autocratic',p:'adj',d:'taking no account of others\' wishes; despotic'},
+    {w:'peremptory',p:'adj',d:'insisting on immediate obedience; imperious'},
+    {w:'acquiesce',p:'v',d:'to accept something reluctantly without protest'},
+    {w:'capitulate',p:'v',d:'to cease to resist an opponent; give in'},
+    {w:'hegemony',p:'n',d:'leadership or dominance of one country over others'},
+  ]},
+  {g:'G19 \u00b7 Honesty',w:[
+    {w:'veracity',p:'n',d:'conformity to facts; habitual truthfulness'},
+    {w:'candor',p:'n',d:'the quality of being open and honest'},
+    {w:'forthright',p:'adj',d:'direct and outspoken; not evasive'},
+    {w:'veracious',p:'adj',d:'speaking or representing the truth; truthful'},
+    {w:'mendacious',p:'adj',d:'not telling the truth; dishonest'},
+    {w:'spurious',p:'adj',d:'not being what it purports to be; false'},
+    {w:'apocryphal',p:'adj',d:'of doubtful authenticity, though widely circulated'},
+    {w:'disingenuous',p:'adj',d:'not candid or sincere, especially about motives'},
+    {w:'verisimilitude',p:'n',d:'the appearance of being true or real'},
+    {w:'tendentious',p:'adj',d:'promoting a particular cause or point of view'},
+  ]},
+  {g:'G20 \u00b7 Time',w:[
+    {w:'transitory',p:'adj',d:'not permanent; lasting only a short time'},
+    {w:'fleeting',p:'adj',d:'lasting for a very short time'},
+    {w:'evanescent',p:'adj',d:'soon passing out of sight or existence'},
+    {w:'perpetual',p:'adj',d:'never ending or changing; occurring continually'},
+    {w:'enduring',p:'adj',d:'continuing or long-lasting; durable'},
+    {w:'perennial',p:'adj',d:'lasting or existing for a long or infinite time'},
+    {w:'protracted',p:'adj',d:'lasting longer than expected or usual'},
+    {w:'interminable',p:'adj',d:'endless or apparently endless; tediously long'},
+    {w:'immemorial',p:'adj',d:'so ancient its beginning is beyond memory'},
+    {w:'contemporaneous',p:'adj',d:'existing or occurring at the same time'},
+  ]},
+  {g:'G21 \u00b7 Knowledge',w:[
+    {w:'omniscient',p:'adj',d:'knowing everything; having unlimited knowledge'},
+    {w:'erudition',p:'n',d:'extensive knowledge acquired chiefly from books'},
+    {w:'polymath',p:'n',d:'a person of wide knowledge in many subjects'},
+    {w:'pedantic',p:'adj',d:'excessively concerned with minor details or rules'},
+    {w:'nescient',p:'adj',d:'lacking knowledge; ignorant'},
+    {w:'philistine',p:'n/adj',d:'hostile or indifferent to culture and the arts'},
+    {w:'acumen',p:'n',d:'the ability to make good judgments quickly'},
+    {w:'sapient',p:'adj',d:'having or showing great wisdom'},
+    {w:'cognizant',p:'adj',d:'having knowledge or being aware of something'},
+    {w:'recondite',p:'adj',d:'not known by many people; abstruse'},
+  ]},
+  {g:'G22 \u00b7 Work',w:[
+    {w:'assiduous',p:'adj',d:'showing great care, attention, and effort'},
+    {w:'diligent',p:'adj',d:'having or showing care and conscientiousness in work'},
+    {w:'sedulous',p:'adj',d:'showing dedication and great effort in work'},
+    {w:'indolent',p:'adj',d:'wanting to avoid activity or exertion; lazy'},
+    {w:'slothful',p:'adj',d:'lazy; averse to activity or exertion'},
+    {w:'listless',p:'adj',d:'lacking energy or enthusiasm; languid'},
+    {w:'lethargic',p:'adj',d:'affected by lethargy; sluggish and apathetic'},
+    {w:'torpid',p:'adj',d:'mentally or physically inactive; dormant'},
+    {w:'inert',p:'adj',d:'lacking the ability or strength to move or act'},
+    {w:'somnolent',p:'adj',d:'sleepy; tending to induce sleepiness'},
+  ]},
+  {g:'G23 \u00b7 Importance',w:[
+    {w:'momentous',p:'adj',d:'of great importance or significance'},
+    {w:'consequential',p:'adj',d:'following as a result; important or significant'},
+    {w:'paramount',p:'adj',d:'more important than anything else; supreme'},
+    {w:'pivotal',p:'adj',d:'of crucial importance in relation to development'},
+    {w:'trivial',p:'adj',d:'of little value or importance; trifling'},
+    {w:'negligible',p:'adj',d:'so small or unimportant as to be not worth considering'},
+    {w:'inconsequential',p:'adj',d:'not important; of little consequence'},
+    {w:'paltry',p:'adj',d:'small or meager in amount; petty'},
+    {w:'nugatory',p:'adj',d:'of no value or importance; worthless'},
+    {w:'trifling',p:'adj',d:'unimportant; not serious or valuable'},
+  ]},
+  {g:'G24 \u00b7 Speech',w:[
+    {w:'loquacious',p:'adj',d:'tending to talk a great deal; talkative'},
+    {w:'garrulous',p:'adj',d:'excessively talkative, especially on trivial matters'},
+    {w:'voluble',p:'adj',d:'talking fluently or incessantly; glib'},
+    {w:'verbose',p:'adj',d:'using more words than needed'},
+    {w:'taciturn',p:'adj',d:'reserved or uncommunicative in speech'},
+    {w:'reticent',p:'adj',d:'not revealing one\'s thoughts or feelings readily'},
+    {w:'laconic',p:'adj',d:'using very few words; brief and concise'},
+    {w:'terse',p:'adj',d:'sparing in the use of words; abrupt'},
+    {w:'succinct',p:'adj',d:'briefly and clearly expressed'},
+    {w:'pithy',p:'adj',d:'concise and forcefully expressive'},
+  ]},
+  {g:'G25 \u00b7 Agreement',w:[
+    {w:'consensus',p:'n',d:'general agreement among a group or community'},
+    {w:'accord',p:'n',d:'an official agreement or treaty between parties'},
+    {w:'concord',p:'n',d:'agreement or harmony between people or groups'},
+    {w:'discord',p:'n',d:'disagreement between people; lack of harmony'},
+    {w:'dissension',p:'n',d:'disagreement that leads to strife within a group'},
+    {w:'acrimony',p:'n',d:'bitterness or ill feeling; sharpness of manner'},
+    {w:'animosity',p:'n',d:'strong hostility or ill will toward another'},
+    {w:'antagonism',p:'n',d:'active opposition or hostility toward someone'},
+    {w:'propitiate',p:'v',d:'to win or regain the favor of someone; appease'},
+    {w:'placate',p:'v',d:'to make someone less angry or hostile; pacify'},
+  ]},
+  {g:'G26 \u00b7 Stubbornness',w:[
+    {w:'intractable',p:'adj',d:'hard to control, manage, or deal with'},
+    {w:'recalcitrant',p:'adj',d:'having an obstinately uncooperative attitude'},
+    {w:'refractory',p:'adj',d:'stubborn or unmanageable; resistant to treatment'},
+    {w:'obdurate',p:'adj',d:'stubbornly refusing to change one\'s opinion'},
+    {w:'tenacious',p:'adj',d:'holding fast; persistent and determined'},
+    {w:'inimical',p:'adj',d:'tending to obstruct or harm; hostile'},
+    {w:'inexorable',p:'adj',d:'impossible to stop or prevent; relentless'},
+    {w:'implacable',p:'adj',d:'unable to be appeased or pacified; relentless'},
+    {w:'intransigent',p:'adj',d:'refusing to change one\'s views or compromise'},
+    {w:'pertinacious',p:'adj',d:'stubbornly persistent; unwilling to give up'},
+  ]},
+  {g:'G27 \u00b7 GRE High-Freq',w:[
+    {w:'propitious',p:'adj',d:'giving or indicating a good chance of success'},
+    {w:'ineffable',p:'adj',d:'too great or extreme to be expressed in words'},
+    {w:'malfeasance',p:'n',d:'wrongdoing, especially by a public official'},
+    {w:'solecism',p:'n',d:'a grammatical mistake or a breach of etiquette'},
+    {w:'pellucid',p:'adj',d:'translucently clear; easily understood'},
+    {w:'ineluctable',p:'adj',d:'unable to be resisted or avoided; inescapable'},
+    {w:'vituperate',p:'v',d:'to blame or insult with harsh criticism'},
+    {w:'disabuse',p:'v',d:'to free someone from a false impression or belief'},
+    {w:'sanguinary',p:'adj',d:'involving or causing much bloodshed'},
+    {w:'lassitude',p:'n',d:'physical or mental weariness; lack of energy'},
+  ]},
+];
+
+/* ================================================================
+   VOCAB LOGIC
+   ================================================================ */
+var vGrp=0, vIdx=0, vQ=[];
+function buildVQ(){
+  var words=VOCAB[vGrp].w, mast={}, strug={};
+  state.vocab.mastered.forEach(function(k){var p=k.split(':');if(+p[0]===vGrp)mast[+p[1]]=1;});
+  state.vocab.struggling.forEach(function(k){var p=k.split(':');if(+p[0]===vGrp)strug[+p[1]]=1;});
+  vQ=[];
+  for(var i=0;i<words.length;i++){
+    if(mast[i])continue;
+    var reps=strug[i]?3:1;
+    for(var r=0;r<reps;r++)vQ.push(i);
+  }
+  if(!vQ.length){for(var i=0;i<words.length;i++)vQ.push(i);}
+  vIdx=0;
+}
+function renderVocabStats(){
+  var mEl=document.getElementById('vMastN');if(mEl)mEl.textContent=state.vocab.mastered.length;
+  var sEl=document.getElementById('vStrugN');if(sEl)sEl.textContent=state.vocab.struggling.length;
+  renderVGGrid();
+}
+function renderVGGrid(){
+  var grid=document.getElementById('vgGrid');if(!grid)return;
+  var html='';
+  for(var i=0;i<VOCAB.length;i++){
+    var g=VOCAB[i];
+    var mastN=0;
+    state.vocab.mastered.forEach(function(k){var p=k.split(':');if(+p[0]===i)mastN++;});
+    var pct=Math.round(mastN/g.w.length*100);
+    var shortName=g.g.split('\u00b7')[1]?g.g.split('\u00b7')[1].trim():g.g;
+    html+='<button class="vg-btn'+(i===vGrp?' on':'')+'" onclick="selectVGrp('+i+')">'+shortName+'<span class="vg-pct">'+pct+'%</span></button>';
+  }
+  grid.innerHTML=html;
+}
+function selectVGrp(i){vGrp=i;buildVQ();renderVGGrid();showVCard();}
+function showVCard(){
+  if(!vQ.length)buildVQ();
+  var wi=vQ[vIdx%vQ.length];
+  var word=VOCAB[vGrp].w[wi];
+  var inner=document.getElementById('flipInner');
+  if(inner)inner.classList.remove('flipped');
+  function set(id,v){var e=document.getElementById(id);if(e)e.textContent=v;}
+  set('vWord',word.w); set('vGrp',VOCAB[vGrp].g);
+  set('vPos',word.p);  set('vDef',word.d);
+}
+function flipCard(){var el=document.getElementById('flipInner');if(el)el.classList.toggle('flipped');}
+function markVocab(status){
+  var wi=vQ[vIdx%vQ.length], key=vGrp+':'+wi;
+  state.vocab.mastered=state.vocab.mastered.filter(function(k){return k!==key;});
+  state.vocab.struggling=state.vocab.struggling.filter(function(k){return k!==key;});
+  if(status==='mastered')state.vocab.mastered.push(key);
+  else state.vocab.struggling.push(key);
+  save(state); nextCard();
+}
+function nextCard(){
+  vIdx++;
+  if(vIdx>=vQ.length){buildVQ(); vIdx=0;}
+  renderVocabStats(); showVCard();
+}
+
+/* ================================================================
+   AWA TRACKER
+   ================================================================ */
+function renderAWA(){
+  var ent=state.awa&&state.awa.entries?state.awa.entries:[];
+  var tmpl=state.awa&&state.awa.template?state.awa.template:'';
+  var avg=document.getElementById('awaAvg'), cnt=document.getElementById('awaCount');
+  var list=document.getElementById('awaList'), te=document.getElementById('awaTemplate');
+  if(avg)avg.textContent=ent.length?(ent.reduce(function(s,e){return s+(+e.score||0);},0)/ent.length).toFixed(1):'—';
+  if(cnt)cnt.textContent=ent.length;
+  if(te&&document.activeElement!==te)te.value=tmpl;
+  if(!list)return;
+  if(!ent.length){list.innerHTML='<div class="empty">No essays logged yet. Every practice attempt goes here.</div>';return;}
+  list.innerHTML=[].concat(ent).sort(function(a,b){return b.date.localeCompare(a.date);}).map(function(e){
+    return '<div class="awa-entry">'+
+      '<div class="ae-top"><span style="font-weight:700">'+fmt(e.date)+' \u00b7 '+e.type+'</span><span class="ae-score">'+(e.score!=null?e.score:'\u2014')+'</span></div>'+
+      (e.prompt?'<div class="ae-meta">'+e.prompt.slice(0,90)+(e.prompt.length>90?'\u2026':'')+'</div>':'')+
+      (e.notes?'<div style="font-size:13px;margin-top:5px">'+e.notes+'</div>':'')+
+      '<button class="danger" onclick="delAWA(\''+e.id+'\')" style="margin-top:6px;font-size:11px">delete</button>'+
+      '</div>';
+  }).join('');
+}
+function delAWA(id){state.awa.entries=state.awa.entries.filter(function(e){return e.id!==id;});save(state);renderAWA();}
+function renderAWA_template(){var te=document.getElementById('awaTemplate');if(te&&document.activeElement!==te)te.value=(state.awa&&state.awa.template)||'';}
+document.getElementById('awaTmplSave').onclick=function(){
+  if(!state.awa)state.awa={entries:[],template:''};
+  state.awa.template=document.getElementById('awaTemplate').value;save(state);
+  var b=document.getElementById('awaTmplSave');b.textContent='Saved \u2713';setTimeout(function(){b.textContent='Save template';},1400);
+};
+document.getElementById('awaSave').onclick=function(){
+  var date=(document.getElementById('awaDate')||{value:todayISO()}).value||todayISO();
+  var score=(document.getElementById('awaScore')||{value:''}).value.trim();
+  var entry={id:''+Date.now(),date:date,
+    type:(document.getElementById('awaType')||{value:'Issue'}).value,
+    prompt:(document.getElementById('awaPrompt')||{value:''}).value.trim(),
+    score:score?parseFloat(score):null,
+    notes:(document.getElementById('awaNotes')||{value:''}).value.trim()};
+  if(!state.awa)state.awa={entries:[],template:''};
+  state.awa.entries.push(entry);save(state);
+  ['awaPrompt','awaScore','awaNotes'].forEach(function(id){var el=document.getElementById(id);if(el)el.value='';});
+  renderAWA();
+  var b=document.getElementById('awaSave');b.textContent='Saved \u2713';setTimeout(function(){b.textContent='Log essay';},1400);
+};
+
+/* ================================================================
+   NOTES
+   ================================================================ */
+function renderNotes(){
+  var list=document.getElementById('notesList');if(!list)return;
+  var q=((document.getElementById('ntSearch')||{}).value||'').toLowerCase();
+  var tag=((document.getElementById('ntFilter')||{}).value)||'';
+  var notes=(state.notes||[]).slice().reverse();
+  if(q)notes=notes.filter(function(n){return (n.title+' '+n.body).toLowerCase().indexOf(q)>=0;});
+  if(tag)notes=notes.filter(function(n){return n.tag===tag;});
+  if(!notes.length){list.innerHTML='<div class="empty">No notes yet. Formulas, strategies, vocab rules \u2014 capture anything worth saving.</div>';return;}
+  list.innerHTML=notes.map(function(n){
+    return '<div class="note-card">'+
+      '<div class="nt-top"><div><div class="nt-title">'+n.title+'</div>'+
+      '<span class="nt-tag '+n.tag+'">'+n.tag+'</span></div>'+
+      '<button class="danger" onclick="delNote(\''+n.id+'\')" style="font-size:12px">\u2715</button></div>'+
+      '<div class="nt-body">'+n.body+'</div></div>';
+  }).join('');
+}
+function delNote(id){state.notes=(state.notes||[]).filter(function(n){return n.id!==id;});save(state);renderNotes();}
+document.getElementById('ntSave').onclick=function(){
+  var title=(document.getElementById('ntTitle')||{value:''}).value.trim();
+  if(!title){var el=document.getElementById('ntTitle');if(el)el.focus();return;}
+  state.notes=state.notes||[];
+  state.notes.push({id:''+Date.now(),title:title,
+    tag:(document.getElementById('ntTag')||{value:'Formula'}).value,
+    body:(document.getElementById('ntBody')||{value:''}).value.trim(),
+    date:todayISO()});
+  save(state);
+  ['ntTitle','ntBody'].forEach(function(id){var el=document.getElementById(id);if(el)el.value='';});
+  renderNotes();
+  var b=document.getElementById('ntSave');b.textContent='Added \u2713';setTimeout(function(){b.textContent='Save note';},1400);
+};
+
+/* ================================================================
+   CSV EXPORT
+   ================================================================ */
+function exportCSV(){
+  var mocks=state.logs.filter(function(l){return l.mock;}).sort(function(a,b){return a.date.localeCompare(b.date);});
+  if(!mocks.length){alert('No mock scores logged yet.');return;}
+  var rows=[['Date','Raw','Q','V','Total']];
+  mocks.forEach(function(m){var p=parseMock(m.mock);rows.push([m.date,m.mock,p.q||'',p.v||'',p.tot||'']);});
+  var csv=rows.map(function(r){return r.join(',');}).join('\n');
+  var blob=new Blob([csv],{type:'text/csv'});
+  var url=URL.createObjectURL(blob),a=document.createElement('a');
+  a.href=url;a.download='gre-mocks-'+todayISO()+'.csv';a.click();URL.revokeObjectURL(url);
+}
+
+/* === INIT AWADATE === */
+var _awdEl=document.getElementById('awaDate');if(_awdEl)_awdEl.value=todayISO();
+
 $('#lgDate').value = todayISO();
 renderAll();
+/* vocab init after renderAll so state is loaded */
+buildVQ(); renderVGGrid(); showVCard();
+
 
 /* ================================================================
    SERVICE WORKER REGISTRATION
