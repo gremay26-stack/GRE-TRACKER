@@ -292,7 +292,7 @@
     </div>
     <div class="kicker">Full-time prep · GregMat base</div>
     <h1>The Road to 330</h1>
-    <div class="sub" id="planRangeLabel">Jul 7 → Sep 7, 2026 · target 330</div>
+    <div class="sub" id="planRangeLabel">Jul 13 → Sep 4, 2026 · target 330</div>
     <div class="countbar" id="countbar"></div>
   </header>
 
@@ -426,7 +426,7 @@
     </div>
     <div class="card streakwrap" style="margin-top:14px">
       <h3>Mock scores</h3>
-      <div class="hint" id="mockPredictHint">The only numbers that predict Sep 7.</div>
+      <div class="hint" id="mockPredictHint">The only numbers that predict Sep 4.</div>
       <div id="mockList"></div>
     </div>
     <div class="card">
@@ -440,7 +440,7 @@
     </div>
     <div class="card" style="margin-top:14px">
       <h3>Study heatmap</h3>
-      <div class="hint" id="heatmapHint">63 days Jul 7 → Sep 7. Green = done · Red = missed · Dim = future.</div>
+      <div class="hint" id="heatmapHint">54 days Jul 13 → Sep 4. Green = done · Red = missed · Dim = future.</div>
       <div class="heatmap" id="heatmap"></div>
       <div class="hm-legend">
         <span><span class="hm-sw" style="background:var(--good)"></span>Done</span>
@@ -652,80 +652,72 @@ const firebaseConfig = {
 
 /* ================================================================
    PLAN DATA
+   Start shifted to 13 Jul 2026; one optional early buffer was absorbed so completion remains 4 Sep 2026.
    ================================================================ */
 const PLAN = [
   {type:'phase',label:'Phase 1 — Arithmetic + Algebra foundation · GM Days 1–9',color:'#2c3e50'},
-  {date:'2026-07-07',tag:'GM Day 1',content:'Arithmetic S1+2: Integers → Prime Factorization.',add:'Vocab G1+2 (double up). QC 10. Error log on.'},
-  {date:'2026-07-08',tag:'GM Day 2',content:'Arithmetic S3+4: Infinitude of Primes → Irrational II.',add:'PrepSwift parallel. Vocab G3.'},
-  {date:'2026-07-09',tag:'GM Day 3',content:'Arithmetic S5+6: Rounding → Fraction/Decimal/Ratio/Percent.',add:'Vocab G4.'},
-  {date:'2026-07-10',tag:'Quiz gate',tagtype:'gate',content:'Arithmetic S7+8 + homework. Arithmetic Fundamentals Quiz — 80% to advance.',add:'Vocab G5. Re-sit on a buffer day if under 80%.'},
-  {date:'2026-07-11',tag:'GM Day 5',content:'Arithmetic S9 + Algebra S10: Variables → Linear Equations. ★ D2 concept-gap zone.',add:'Vocab G6. Write variable = ___ before every NE.'},
-  {date:'2026-07-12',tag:'GM Day 6',content:'Algebra S11+12: Solving 1-Var → Functions 1.',add:'Vocab G7.'},
-  {date:'2026-07-13',tag:'Buffer',content:'Catch-up. Re-sit Arithmetic quiz if needed, or pull Day 7 forward if on track.',add:'Light day by design. Don\'t skip vocab/QC.'},
-  {date:'2026-07-14',tag:'GM Day 7',content:'Algebra S13+14: Functions 2 → Working Against Each Other (skip Sequences first pass).',add:'Vocab G8.'},
-  {date:'2026-07-15',tag:'Quiz gate',tagtype:'gate',content:'Algebra S15+16: Sequences + Series. Algebra Fundamentals Quiz — 80% to advance.',add:'Vocab G9.'},
+  {date:'2026-07-13',tag:'GM Day 1',content:'Arithmetic S1+2: Integers → Prime Factorization.',add:'Vocab G1+2 (double up). QC 10. Error log on.'},
+  {date:'2026-07-14',tag:'GM Day 2',content:'Arithmetic S3+4: Infinitude of Primes → Irrational II.',add:'PrepSwift parallel. Vocab G3.'},
+  {date:'2026-07-15',tag:'GM Day 3',content:'Arithmetic S5+6: Rounding → Fraction/Decimal/Ratio/Percent.',add:'Vocab G4.'},
+  {date:'2026-07-16',tag:'Quiz gate',tagtype:'gate',content:'Arithmetic S7+8 + homework. Arithmetic Fundamentals Quiz — 80% to advance.',add:'Vocab G5. Re-sit on a buffer day if under 80%.'},
+  {date:'2026-07-17',tag:'GM Day 5',content:'Arithmetic S9 + Algebra S10: Variables → Linear Equations. ★ D2 concept-gap zone.',add:'Vocab G6. Write variable = ___ before every NE.'},
+  {date:'2026-07-18',tag:'GM Day 6',content:'Algebra S11+12: Solving 1-Var → Functions 1.',add:'Vocab G7.'},
+  {date:'2026-07-19',tag:'GM Day 7',content:'Algebra S13+14: Functions 2 → Working Against Each Other (skip Sequences first pass).',add:'Vocab G8.'},
+  {date:'2026-07-20',tag:'Quiz gate',tagtype:'gate',content:'Algebra S15+16: Sequences + Series. Algebra Fundamentals Quiz — 80% to advance.',add:'Vocab G9.'},
   {type:'phase',label:'Phase 2 — Data Analysis ★ pulled forward · GM Days 10–14',color:'#922b21'},
-  {date:'2026-07-16',tag:'GM Day 9',content:'Algebra S17+18 (catch-up / reinforcement).',add:'Vocab G10.'},
-  {date:'2026-07-17',tag:'GM Day 10',content:'DA S1+2: Ways to Present Data → SD (simple).',add:'★ DI RULE starts: title → axes → units, every question. Vocab G11.'},
-  {date:'2026-07-18',tag:'GM Day 11',content:'DA S3+4: SD (complex) → Permutations or Combinations?',add:'Vocab G12.'},
-  {date:'2026-07-19',tag:'GM Day 12',content:'DA S5+6 continued. ETS Quant Practice Book DA set 1.',add:'Vocab G13.'},
-  {date:'2026-07-20',tag:'Buffer',content:'Catch-up. Re-sit any quiz under 80%, or pull DA S7+8 forward.',add:'Light day.'},
+  {date:'2026-07-21',tag:'GM Day 9',content:'Algebra S17+18 (catch-up / reinforcement).',add:'Vocab G10.'},
+  {date:'2026-07-22',tag:'GM Day 10',content:'DA S1+2: Ways to Present Data → SD (simple).',add:'★ DI RULE starts: title → axes → units, every question. Vocab G11.'},
+  {date:'2026-07-23',tag:'GM Day 11',content:'DA S3+4: SD (complex) → Permutations or Combinations?',add:'Vocab G12.'},
+  {date:'2026-07-24',tag:'GM Day 12',content:'DA S5+6 continued. ETS Quant Practice Book DA set 1.',add:'Vocab G13.'},
+  {date:'2026-07-25',tag:'Buffer',content:'Catch-up. Re-sit any quiz under 80%, or pull DA S7+8 forward.',add:'Light day.'},
   {type:'phase',label:'Phase 3 — Coordinate Geometry + Geometry · GM Days 13–20',color:'#1a5276'},
-  {date:'2026-07-21',tag:'Quiz gate',tagtype:'gate',content:'DA S7+8: Probability → Normal Distribution. DA Fundamentals Quiz — 80% to advance.',add:'Vocab G14.'},
-  {date:'2026-07-22',tag:'GM Day 14',content:'DA S9+10: catch-up / reinforcement.',add:'Vocab G15.'},
-  {date:'2026-07-23',tag:'GM Day 15',content:'Coord Geo S1+2: xy-plane → Systems of Equations.',add:'Vocab G16.'},
-  {date:'2026-07-24',tag:'Quiz gate',tagtype:'gate',content:'Coord Geo S3: Linear Eq Problems → Graph Shifts. Coord Geo Fundamentals Quiz — 80%.',add:'Vocab G17.'},
-  {date:'2026-07-25',tag:'GM Day 17',content:'Geometry S1+2: Lines → 30-60-90 Triangles.',add:'Vocab G18. Draw + label every figure.'},
-  {date:'2026-07-26',tag:'GM Day 18',content:'Geometry S3+4: 45-45-90 → Length of Arc.',add:'Vocab G19.'},
-  {date:'2026-07-27',tag:'Mock',tagtype:'mock',content:'GregMat Practice Test 1 — first numbers check, low stakes. Full review same day.',add:'Calibration, not judgment. Vocab review only.'},
-  {date:'2026-07-28',tag:'GM Day 19',content:'Geometry S5+6: Archimedes → Rectangular Solid.',add:'Vocab G20.'},
-  {date:'2026-07-29',tag:'Quiz gate',tagtype:'gate',content:'Geometry S7+8: catch-up. Geometry Fundamentals Quiz — 80% to advance.',add:'Vocab G21.'},
+  {date:'2026-07-26',tag:'Quiz gate',tagtype:'gate',content:'DA S7+8: Probability → Normal Distribution. DA Fundamentals Quiz — 80% to advance.',add:'Vocab G14.'},
+  {date:'2026-07-27',tag:'GM Day 14',content:'DA S9+10: catch-up / reinforcement.',add:'Vocab G15.'},
+  {date:'2026-07-28',tag:'GM Day 15',content:'Coord Geo S1+2: xy-plane → Systems of Equations.',add:'Vocab G16.'},
+  {date:'2026-07-29',tag:'Quiz gate',tagtype:'gate',content:'Coord Geo S3: Linear Eq Problems → Graph Shifts. Coord Geo Fundamentals Quiz — 80%.',add:'Vocab G17.'},
+  {date:'2026-07-30',tag:'GM Day 17',content:'Geometry S1+2: Lines → 30-60-90 Triangles.',add:'Vocab G18. Draw + label every figure.'},
+  {date:'2026-07-31',tag:'GM Day 18',content:'Geometry S3+4: 45-45-90 → Length of Arc.',add:'Vocab G19.'},
+  {date:'2026-08-01',tag:'Mock',tagtype:'mock',content:'GregMat Practice Test 1 — first numbers check, low stakes. Full review same day.',add:'Calibration, not judgment. Vocab review only.'},
+  {date:'2026-08-02',tag:'GM Day 19',content:'Geometry S5+6: Archimedes → Rectangular Solid.',add:'Vocab G20.'},
+  {date:'2026-08-03',tag:'Quiz gate',tagtype:'gate',content:'Geometry S7+8: catch-up. Geometry Fundamentals Quiz — 80% to advance.',add:'Vocab G21.'},
   {type:'phase',label:'Phase 4 — Quant Strategy · GM Days 21–28',color:'#6c3483'},
-  {date:'2026-07-30',tag:'GM Day 21',content:'Quant Toolkit S1: Making Deductions → Piece by Piece.',add:'Vocab G22.'},
-  {date:'2026-07-31',tag:'GM Day 22',content:'Quant Toolkit S2+3: Simplifying QC → Calculating Extremes II.',add:'Vocab G23.'},
-  {date:'2026-08-01',tag:'GM Day 23',content:'Quant Toolkit S4+5: Have a System → Sufficient Information.',add:'Vocab G24.'},
-  {date:'2026-08-02',tag:'GM Day 24',content:'Quant Toolkit S6 + Mixed Practice Set 1.',add:'Vocab G25.'},
-  {date:'2026-08-03',tag:'GM Day 25',content:'Quant Toolkit S7+8 + Mixed Practice Set 2.',add:'Vocab G26.'},
-  {date:'2026-08-04',tag:'GM Day 26',content:'Time Management video + Mixed Practice Set 3.',add:'Vocab G27.'},
-  {date:'2026-08-05',tag:'GM Day 27',content:'Four Keys to High Quant + High Verbal + OG Practice Test 1 Quant (timed practice).',add:'All 27 vocab groups reviewed once.'},
-  {date:'2026-08-06',tag:'Curriculum done',tagtype:'gate',content:'Buffer / catch-up. Full error-log review of everything from Month 1.',add:'Curriculum complete. Drilling starts tomorrow.'},
+  {date:'2026-08-04',tag:'GM Day 21',content:'Quant Toolkit S1: Making Deductions → Piece by Piece.',add:'Vocab G22.'},
+  {date:'2026-08-05',tag:'GM Day 22',content:'Quant Toolkit S2+3: Simplifying QC → Calculating Extremes II.',add:'Vocab G23.'},
+  {date:'2026-08-06',tag:'GM Day 23',content:'Quant Toolkit S4+5: Have a System → Sufficient Information.',add:'Vocab G24.'},
+  {date:'2026-08-07',tag:'GM Day 24',content:'Quant Toolkit S6 + Mixed Practice Set 1.',add:'Vocab G25.'},
+  {date:'2026-08-08',tag:'GM Day 25',content:'Quant Toolkit S7+8 + Mixed Practice Set 2.',add:'Vocab G26.'},
+  {date:'2026-08-09',tag:'GM Day 26',content:'Time Management video + Mixed Practice Set 3.',add:'Vocab G27.'},
+  {date:'2026-08-10',tag:'GM Day 27',content:'Four Keys to High Quant + High Verbal + OG Practice Test 1 Quant (timed practice).',add:'All 27 vocab groups reviewed once.'},
+  {date:'2026-08-11',tag:'Curriculum done',tagtype:'gate',content:'Buffer / catch-up. Full error-log review of everything from Month 1.',add:'Curriculum complete. Drilling starts tomorrow.'},
   {type:'phase',label:'Month 2 · Week 5 — full mixed drilling',color:'#1e6b3c'},
-  {date:'2026-08-07',tag:'Drill',content:'Manhattan 5lb mixed: Arithmetic + Algebra, 35Q timed. Redo all open error-log entries.',add:'No new GregMat sessions from here. This is where the score moves.'},
-  {date:'2026-08-08',tag:'Drill',content:'Manhattan 5lb mixed: DA + Geometry, 35Q timed. Big Book QC mental-math, target 29/30.',add:''},
-  {date:'2026-08-09',tag:'Mock',tagtype:'mock',content:'PP PLUS 1 — first ETS-accurate signal. Full conditions, AWA included.',add:'Warm-up only beforehand. No studying.'},
-  {date:'2026-08-10',tag:'Review',content:'PP1 full 6-step review. Build top 3 quant + top 2 verbal leaks.',add:'Vocab: all 27 groups self-quiz.'},
+  {date:'2026-08-12',tag:'Drill',content:'Manhattan 5lb mixed: Arithmetic + Algebra, 35Q timed. Redo all open error-log entries.',add:'No new GregMat sessions from here. This is where the score moves.'},
+  {date:'2026-08-13',tag:'Drill',content:'Manhattan 5lb mixed: DA + Geometry, 35Q timed. Big Book QC mental-math, target 29/30.',add:''},
+  {date:'2026-08-14',tag:'Mock',tagtype:'mock',content:'PP PLUS 1 — first ETS-accurate signal. Full conditions, AWA included.',add:'Warm-up only beforehand. No studying.'},
+  {date:'2026-08-15',tag:'Review',content:'PP1 full 6-step review. Build top 3 quant + top 2 verbal leaks.',add:'Vocab: all 27 groups self-quiz.'},
   {type:'phase',label:'Month 2 · Week 6 — PP1 leak drilling',color:'#1e6b3c'},
-  {date:'2026-08-11',tag:'Drill',content:'PP1 Leak #1: 25Q targeted from error log. KMF Medium sections 1–2.',add:''},
-  {date:'2026-08-12',tag:'Drill',content:'PP1 Leak #2: 25Q targeted. KMF Medium 3–4. RC structure-read, 1 passage.',add:''},
-  {date:'2026-08-13',tag:'Drill',content:'Full mixed timed set, all topics, 30Q. KMF Hard section 1.',add:''},
-  {date:'2026-08-14',tag:'Drill',content:'TC + SE mixed, 20Q. Weakest topic from PP1 gets 20 extra Q.',add:''},
-  {date:'2026-08-15',tag:'Drill',content:'ETS OG mixed practice, real-exam conditions.',add:''},
-  {date:'2026-08-16',tag:'Drill',content:'Full mixed timed set. RC + TC + SE daily block.',add:''},
-  {date:'2026-08-17',tag:'Review',content:'Error log full review. Redo all due entries.',add:'Vocab: aggressive self-quiz, all groups.'},
-  {type:'phase',label:'Month 2 · Week 7 — hard drilling + Mock 2',color:'#1e6b3c'},
-  {date:'2026-08-18',tag:'Drill',content:'KMF Hard section 2, 15Q, 2:00 hard-stop. Weakest topic +20Q.',add:''},
-  {date:'2026-08-19',tag:'Drill',content:'KMF Hard section 3, 15Q. RC + TC + SE block.',add:''},
-  {date:'2026-08-20',tag:'Drill',content:'KMF Hard section 4, 15Q. ETS OG mixed sets.',add:''},
-  {date:'2026-08-21',tag:'Drill',content:'Full mixed timed set, all topics. Error-log redo.',add:''},
-  {date:'2026-08-22',tag:'Drill',content:'Light mixed set + formula sheet review. Rest before mock.',add:''},
-  {date:'2026-08-23',tag:'Mock',tagtype:'mock',content:'PP PLUS 2 — full conditions. Drives Week 8 targeting.',add:'Warm-up only. No studying beforehand.'},
-  {date:'2026-08-24',tag:'Review',content:'PP2 full 6-step review. Rebuild top leaks list.',add:''},
-  {type:'phase',label:'Month 2 · Week 8 — PP2 leak drilling + Mock 3',color:'#1e6b3c'},
-  {date:'2026-08-25',tag:'Drill',content:'PP2 Leak #1+#2: 25Q each. Redo all open entries from Weeks 5–7.',add:''},
-  {date:'2026-08-26',tag:'Drill',content:'KMF Hard, weakest 2 topics, 20Q each.',add:'Vocab: top-30 hardest words across all groups.'},
-  {date:'2026-08-27',tag:'Drill',content:'Full mixed timed set. RC + TC + SE block.',add:''},
-  {date:'2026-08-28',tag:'Drill',content:'Light mixed + formula sheet from memory, gaps checked.',add:''},
-  {date:'2026-08-29',tag:'Drill',content:'10 confidence Q (D2–D3). Rest before mock.',add:''},
-  {date:'2026-08-30',tag:'Mock',tagtype:'mock',content:'PP PLUS 3 — final readiness check. Full conditions.',add:'Finalise Test-Day Rules (max 5) after review.'},
-  {date:'2026-08-31',tag:'Review',content:'PP3 full review. Top-2 leaks only get fixed next 2 days.',add:''},
-  {type:'phase',label:'Week 9 — taper',color:'#555555'},
-  {date:'2026-09-01',tag:'Taper',content:'PP3 top-2 leaks only, 15Q each. Last day of anything new.',add:'45 min max.'},
-  {date:'2026-09-02',tag:'Taper',content:'PP3 leak fix #2. Formula sheet read once.',add:'45 min max.'},
-  {date:'2026-09-03',tag:'Taper',content:'Formula sheet + Test-Day Rules: read once each. Vocab top-20.',add:''},
-  {date:'2026-09-04',tag:'Taper',content:'10 easy-medium Q only. Nothing hard. Vocab top-20.',add:''},
-  {date:'2026-09-05',tag:'Taper',content:'5 confidence Q. Read Rules once. Lay out ID + scratch papers.',add:''},
-  {date:'2026-09-06',tag:'Rest',content:'REST. Zero studying. Sleep by 10:30. Two alarms set.',add:'The work is done.'},
-  {date:'2026-09-07',tag:'EXAM',tagtype:'mock',content:'EXAM DAY. Warm-up: 3 easy Q + 2 easy V. Read Test-Day Rules once. Execute.',add:'9 weeks of work are already done.'},
+  {date:'2026-08-16',tag:'Drill',content:'PP1 Leak #1: 25Q targeted from error log. KMF Medium sections 1–2.',add:''},
+  {date:'2026-08-17',tag:'Drill',content:'PP1 Leak #2: 25Q targeted. KMF Medium 3–4. RC structure-read, 1 passage.',add:''},
+  {date:'2026-08-18',tag:'Drill',content:'Full mixed timed set, all topics, 30Q. KMF Hard section 1.',add:''},
+  {date:'2026-08-19',tag:'Drill',content:'TC + SE mixed, 20Q. Weakest topic from PP1 gets 20 extra Q.',add:''},
+  {date:'2026-08-20',tag:'Drill',content:'ETS OG mixed practice, real-exam conditions.',add:''},
+  {date:'2026-08-21',tag:'Drill',content:'Full mixed timed set. RC + TC + SE daily block.',add:''},
+  {date:'2026-08-22',tag:'Review',content:'Error log full review. Redo all due entries.',add:'Vocab: aggressive self-quiz, all groups.'},
+  {type:'phase',label:'Month 2 · Week 7 — compressed hard drilling + Mock 2',color:'#1e6b3c'},
+  {date:'2026-08-23',tag:'Drill',content:'KMF Hard section 2, 15Q, 2:00 hard-stop. Weakest topic +20Q.',add:''},
+  {date:'2026-08-24',tag:'Drill',content:'KMF Hard section 3, 15Q. RC + TC + SE block.',add:''},
+  {date:'2026-08-25',tag:'Drill',content:'KMF Hard section 4, 15Q. ETS OG mixed sets.',add:''},
+  {date:'2026-08-26',tag:'Drill',content:'Full mixed timed set, all topics. Error-log redo. Light formula sheet pass at night.',add:''},
+  {date:'2026-08-27',tag:'Mock',tagtype:'mock',content:'PP PLUS 2 — full conditions. Drives final targeting.',add:'Moved forward to protect Sep 4 completion.'},
+  {date:'2026-08-28',tag:'Review',content:'PP2 full 6-step review. Rebuild top leaks list and rank only the top 3.',add:''},
+  {type:'phase',label:'Month 2 · Week 8 — compressed PP2 leaks + Mock 3',color:'#1e6b3c'},
+  {date:'2026-08-29',tag:'Drill',content:'PP2 Leak #1+#2: 25Q each. Redo all open entries from Weeks 5–7.',add:''},
+  {date:'2026-08-30',tag:'Drill',content:'KMF Hard, weakest 2 topics, 20Q each. Vocab: top-30 hardest words across all groups.',add:''},
+  {date:'2026-08-31',tag:'Drill',content:'Full mixed timed set. RC + TC + SE block.',add:''},
+  {date:'2026-09-01',tag:'Taper drill',content:'Light mixed + formula sheet from memory. Then 10 confidence Q (D2–D3).',add:'Nothing new after today.'},
+  {date:'2026-09-02',tag:'Mock',tagtype:'mock',content:'PP PLUS 3 — final readiness check. Full conditions.',add:'Finalise Test-Day Rules (max 5) after review.'},
+  {type:'phase',label:'Final compressed taper — PP3 review + rest',color:'#555555'},
+  {date:'2026-09-03',tag:'Review + taper',content:'PP3 full review in the morning. Fix only top-2 leaks, 15Q each. Read formula sheet + Test-Day Rules once.',add:'45–60 min max after review. No new material.'},
+  {date:'2026-09-04',tag:'EXAM',tagtype:'mock',content:'EXAM DAY / PLAN COMPLETE. Warm-up: 3 easy Q + 2 easy V. Read Test-Day Rules once. Execute.',add:'Compressed plan completed by Sep 4.'},
 ];
 
 const MOTIV = [
@@ -881,8 +873,8 @@ function addDays(iso,n) {
   return d.getFullYear() + '-' + String(d.getMonth()+1).padStart(2,'0') + '-' + String(d.getDate()).padStart(2,'0');
 }
 const planDays = PLAN.filter(p => !p.type);
-const PLAN_START = '2026-07-07';
-const DEFAULT_EXAM_DATE = '2026-09-07';
+const PLAN_START = '2026-07-13';
+const DEFAULT_EXAM_DATE = '2026-09-04';
 
 function daysInclusive(startIso, endIso) {
   return Math.max(0, Math.round((new Date(endIso+'T00:00:00') - new Date(startIso+'T00:00:00')) / 864e5) + 1);
@@ -1226,7 +1218,12 @@ function renderTodayFlag() {
    EXAM COUNTDOWN
    ================================================================ */
 const CDKEY = 'gretracker_examdate';
-function getExamDate() { return localStorage.getItem(CDKEY) || DEFAULT_EXAM_DATE; }
+const LEGACY_DEFAULT_EXAM_DATES = ['2026-09-07','2026-09-12'];
+function getExamDate() {
+  const saved = localStorage.getItem(CDKEY);
+  if (!saved || LEGACY_DEFAULT_EXAM_DATES.indexOf(saved) !== -1) return DEFAULT_EXAM_DATE;
+  return saved;
+}
 function setExamDate(d) { if (d) localStorage.setItem(CDKEY, d); }
 function renderCountdown() {
   const inp = document.getElementById('cdDate'), box = document.getElementById('cdDisplay');
@@ -1425,12 +1422,12 @@ if(localStorage.getItem('gretracker_dark')==='1'){document.documentElement.setAt
    PHASE INDICATOR
    ================================================================ */
 var PHASES=[
-  {label:'Phase 1 — Arithmetic + Algebra',color:'#2c3e50',start:'2026-07-07',end:'2026-07-15'},
-  {label:'Phase 2 — Data Analysis',color:'#922b21',start:'2026-07-16',end:'2026-07-20'},
-  {label:'Phase 3 — Coord Geo + Geometry',color:'#1a5276',start:'2026-07-21',end:'2026-07-29'},
-  {label:'Phase 4 — Quant Strategy',color:'#6c3483',start:'2026-07-30',end:'2026-08-06'},
-  {label:'Month 2 — Drilling & Mocks',color:'#1e6b3c',start:'2026-08-07',end:'2026-08-31'},
-  {label:'Week 9 — Taper',color:'#555555',start:'2026-09-01',end:'2026-09-07'},
+  {label:'Phase 1 — Arithmetic + Algebra',color:'#2c3e50',start:'2026-07-13',end:'2026-07-20'},
+  {label:'Phase 2 — Data Analysis',color:'#922b21',start:'2026-07-21',end:'2026-07-25'},
+  {label:'Phase 3 — Coord Geo + Geometry',color:'#1a5276',start:'2026-07-26',end:'2026-08-03'},
+  {label:'Phase 4 — Quant Strategy',color:'#6c3483',start:'2026-08-04',end:'2026-08-11'},
+  {label:'Month 2 — Drilling & Mocks',color:'#1e6b3c',start:'2026-08-12',end:'2026-09-02'},
+  {label:'Final compressed taper',color:'#555555',start:'2026-09-03',end:'2026-09-04'},
 ];
 function renderPhase(){
   var bar=document.getElementById('phaseBar');if(!bar)return;
@@ -1450,7 +1447,7 @@ function renderPhase(){
 /* ================================================================
    HEATMAP
    ================================================================ */
-var MOCK_DAYS={};['2026-07-27','2026-08-09','2026-08-23','2026-08-30'].forEach(function(d){MOCK_DAYS[d]=1;});
+var MOCK_DAYS={};['2026-08-01','2026-08-14','2026-08-27','2026-09-02'].forEach(function(d){MOCK_DAYS[d]=1;});
 function renderHeatmap(){
   var box=document.getElementById('heatmap');if(!box)return;
   var t=todayISO(),cells='',d=PLAN_START,end=getExamDate();
