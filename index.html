@@ -100,6 +100,24 @@
   .day .dadd{font-size:12.5px;color:var(--muted);margin-top:5px;padding-top:5px;border-top:1px dashed var(--line)}
   .day .dadd b{color:var(--accent);font-weight:700}
 
+  .carry-actions{margin-top:8px;display:flex;gap:7px;flex-wrap:wrap}
+  .carry-add{border-color:var(--accent);color:var(--accent);background:transparent}
+  .carry-list{margin-top:9px;display:grid;gap:7px}
+  .carry-item{display:flex;align-items:flex-start;gap:9px;padding:9px 10px;border:1px solid #dfc5b8;
+    background:#fbf2ee;border-radius:9px;font-size:12.5px}
+  .carry-item.done{opacity:.62;background:var(--good-soft);border-color:#bcdcc6}
+  .carry-check{flex:0 0 auto;width:21px;height:21px;border:1.5px solid var(--accent);border-radius:6px;
+    background:#fff;cursor:pointer;display:grid;place-items:center;font-size:12px;color:#fff;font-weight:800}
+  .carry-check.on{background:var(--good);border-color:var(--good)}
+  .carry-main{flex:1;min-width:0}
+  .carry-meta{font-family:"SF Mono",ui-monospace,monospace;font-size:9.5px;letter-spacing:.05em;
+    text-transform:uppercase;color:var(--accent);margin-bottom:2px}
+  .carry-tools{display:flex;gap:5px;flex-wrap:wrap;margin-top:6px}
+  .carry-tools button{font-family:inherit;font-size:10.5px;border:1px solid var(--line);background:var(--card);
+    color:var(--muted);border-radius:6px;padding:3px 7px;cursor:pointer}
+  html[data-dark] .carry-item{background:#3a1f0f;border-color:#5c321d}
+  html[data-dark] .carry-item.done{background:var(--good-soft);border-color:#204830}
+
   .card{background:var(--card);border:1px solid var(--line);border-radius:14px;
     padding:17px;box-shadow:var(--shadow);margin-bottom:14px}
   .card h3{font-size:16px;margin-bottom:3px}
@@ -292,7 +310,7 @@
     </div>
     <div class="kicker">Full-time prep · GregMat base</div>
     <h1>The Road to 330</h1>
-    <div class="sub" id="planRangeLabel">Jul 13 → Sep 4, 2026 · target 330</div>
+    <div class="sub" id="planRangeLabel">Jul 15 → Sep 4, 2026 · target 330</div>
     <div class="countbar" id="countbar"></div>
   </header>
 
@@ -440,7 +458,7 @@
     </div>
     <div class="card" style="margin-top:14px">
       <h3>Study heatmap</h3>
-      <div class="hint" id="heatmapHint">54 days Jul 13 → Sep 4. Green = done · Red = missed · Dim = future.</div>
+      <div class="hint" id="heatmapHint">52 days Jul 15 → Sep 4. Green = done · Red = missed · Dim = future.</div>
       <div class="heatmap" id="heatmap"></div>
       <div class="hm-legend">
         <span><span class="hm-sw" style="background:var(--good)"></span>Done</span>
@@ -652,45 +670,43 @@ const firebaseConfig = {
 
 /* ================================================================
    PLAN DATA
-   Start shifted to 13 Jul 2026; one optional early buffer was absorbed so completion remains 4 Sep 2026.
+   Start shifted to 15 Jul 2026; two buffer days were absorbed so completion remains 4 Sep 2026.
    ================================================================ */
 const PLAN = [
   {type:'phase',label:'Phase 1 — Arithmetic + Algebra foundation · GM Days 1–9',color:'#2c3e50'},
-  {date:'2026-07-13',tag:'GM Day 1',content:'Arithmetic S1+2: Integers → Prime Factorization.',add:'Vocab G1+2 (double up). QC 10. Error log on.'},
-  {date:'2026-07-14',tag:'GM Day 2',content:'Arithmetic S3+4: Infinitude of Primes → Irrational II.',add:'PrepSwift parallel. Vocab G3.'},
-  {date:'2026-07-15',tag:'GM Day 3',content:'Arithmetic S5+6: Rounding → Fraction/Decimal/Ratio/Percent.',add:'Vocab G4.'},
-  {date:'2026-07-16',tag:'Quiz gate',tagtype:'gate',content:'Arithmetic S7+8 + homework. Arithmetic Fundamentals Quiz — 80% to advance.',add:'Vocab G5. Re-sit on a buffer day if under 80%.'},
-  {date:'2026-07-17',tag:'GM Day 5',content:'Arithmetic S9 + Algebra S10: Variables → Linear Equations. ★ D2 concept-gap zone.',add:'Vocab G6. Write variable = ___ before every NE.'},
-  {date:'2026-07-18',tag:'GM Day 6',content:'Algebra S11+12: Solving 1-Var → Functions 1.',add:'Vocab G7.'},
-  {date:'2026-07-19',tag:'GM Day 7',content:'Algebra S13+14: Functions 2 → Working Against Each Other (skip Sequences first pass).',add:'Vocab G8.'},
-  {date:'2026-07-20',tag:'Quiz gate',tagtype:'gate',content:'Algebra S15+16: Sequences + Series. Algebra Fundamentals Quiz — 80% to advance.',add:'Vocab G9.'},
+  {date:'2026-07-15',tag:'GM Day 1',content:'Arithmetic S1+2: Integers → Prime Factorization.',add:'Vocab G1+2 (double up). QC 10. Error log on.'},
+  {date:'2026-07-16',tag:'GM Day 2',content:'Arithmetic S3+4: Infinitude of Primes → Irrational II.',add:'PrepSwift parallel. Vocab G3.'},
+  {date:'2026-07-17',tag:'GM Day 3',content:'Arithmetic S5+6: Rounding → Fraction/Decimal/Ratio/Percent.',add:'Vocab G4.'},
+  {date:'2026-07-18',tag:'Quiz gate',tagtype:'gate',content:'Arithmetic S7+8 + homework. Arithmetic Fundamentals Quiz — 80% to advance.',add:'Vocab G5. Re-sit on a buffer day if under 80%.'},
+  {date:'2026-07-19',tag:'GM Day 5',content:'Arithmetic S9 + Algebra S10: Variables → Linear Equations. ★ D2 concept-gap zone.',add:'Vocab G6. Write variable = ___ before every NE.'},
+  {date:'2026-07-20',tag:'GM Day 6',content:'Algebra S11+12: Solving 1-Var → Functions 1.',add:'Vocab G7.'},
+  {date:'2026-07-21',tag:'GM Day 7',content:'Algebra S13+14: Functions 2 → Working Against Each Other (skip Sequences first pass).',add:'Vocab G8.'},
+  {date:'2026-07-22',tag:'Quiz gate',tagtype:'gate',content:'Algebra S15+16: Sequences + Series. Algebra Fundamentals Quiz — 80% to advance.',add:'Vocab G9.'},
   {type:'phase',label:'Phase 2 — Data Analysis ★ pulled forward · GM Days 10–14',color:'#922b21'},
-  {date:'2026-07-21',tag:'GM Day 9',content:'Algebra S17+18 (catch-up / reinforcement).',add:'Vocab G10.'},
-  {date:'2026-07-22',tag:'GM Day 10',content:'DA S1+2: Ways to Present Data → SD (simple).',add:'★ DI RULE starts: title → axes → units, every question. Vocab G11.'},
-  {date:'2026-07-23',tag:'GM Day 11',content:'DA S3+4: SD (complex) → Permutations or Combinations?',add:'Vocab G12.'},
-  {date:'2026-07-24',tag:'GM Day 12',content:'DA S5+6 continued. ETS Quant Practice Book DA set 1.',add:'Vocab G13.'},
-  {date:'2026-07-25',tag:'Buffer',content:'Catch-up. Re-sit any quiz under 80%, or pull DA S7+8 forward.',add:'Light day.'},
+  {date:'2026-07-23',tag:'GM Day 9',content:'Algebra S17+18 (catch-up / reinforcement).',add:'Vocab G10.'},
+  {date:'2026-07-24',tag:'GM Day 10',content:'DA S1+2: Ways to Present Data → SD (simple).',add:'★ DI RULE starts: title → axes → units, every question. Vocab G11.'},
+  {date:'2026-07-25',tag:'GM Day 11',content:'DA S3+4: SD (complex) → Permutations or Combinations?',add:'Vocab G12.'},
+  {date:'2026-07-26',tag:'GM Day 12',content:'DA S5+6 continued. ETS Quant Practice Book DA set 1.',add:'Vocab G13.'},
   {type:'phase',label:'Phase 3 — Coordinate Geometry + Geometry · GM Days 13–20',color:'#1a5276'},
-  {date:'2026-07-26',tag:'Quiz gate',tagtype:'gate',content:'DA S7+8: Probability → Normal Distribution. DA Fundamentals Quiz — 80% to advance.',add:'Vocab G14.'},
-  {date:'2026-07-27',tag:'GM Day 14',content:'DA S9+10: catch-up / reinforcement.',add:'Vocab G15.'},
-  {date:'2026-07-28',tag:'GM Day 15',content:'Coord Geo S1+2: xy-plane → Systems of Equations.',add:'Vocab G16.'},
-  {date:'2026-07-29',tag:'Quiz gate',tagtype:'gate',content:'Coord Geo S3: Linear Eq Problems → Graph Shifts. Coord Geo Fundamentals Quiz — 80%.',add:'Vocab G17.'},
-  {date:'2026-07-30',tag:'GM Day 17',content:'Geometry S1+2: Lines → 30-60-90 Triangles.',add:'Vocab G18. Draw + label every figure.'},
-  {date:'2026-07-31',tag:'GM Day 18',content:'Geometry S3+4: 45-45-90 → Length of Arc.',add:'Vocab G19.'},
-  {date:'2026-08-01',tag:'Mock',tagtype:'mock',content:'GregMat Practice Test 1 — first numbers check, low stakes. Full review same day.',add:'Calibration, not judgment. Vocab review only.'},
-  {date:'2026-08-02',tag:'GM Day 19',content:'Geometry S5+6: Archimedes → Rectangular Solid.',add:'Vocab G20.'},
-  {date:'2026-08-03',tag:'Quiz gate',tagtype:'gate',content:'Geometry S7+8: catch-up. Geometry Fundamentals Quiz — 80% to advance.',add:'Vocab G21.'},
+  {date:'2026-07-27',tag:'Quiz gate',tagtype:'gate',content:'DA S7+8: Probability → Normal Distribution. DA Fundamentals Quiz — 80% to advance.',add:'Vocab G14.'},
+  {date:'2026-07-28',tag:'GM Day 14',content:'DA S9+10: catch-up / reinforcement.',add:'Vocab G15.'},
+  {date:'2026-07-29',tag:'GM Day 15',content:'Coord Geo S1+2: xy-plane → Systems of Equations.',add:'Vocab G16.'},
+  {date:'2026-07-30',tag:'Quiz gate',tagtype:'gate',content:'Coord Geo S3: Linear Eq Problems → Graph Shifts. Coord Geo Fundamentals Quiz — 80%.',add:'Vocab G17.'},
+  {date:'2026-07-31',tag:'GM Day 17',content:'Geometry S1+2: Lines → 30-60-90 Triangles.',add:'Vocab G18. Draw + label every figure.'},
+  {date:'2026-08-01',tag:'GM Day 18',content:'Geometry S3+4: 45-45-90 → Length of Arc.',add:'Vocab G19.'},
+  {date:'2026-08-02',tag:'Mock',tagtype:'mock',content:'GregMat Practice Test 1 — first numbers check, low stakes. Full review same day.',add:'Calibration, not judgment. Vocab review only.'},
+  {date:'2026-08-03',tag:'GM Day 19',content:'Geometry S5+6: Archimedes → Rectangular Solid.',add:'Vocab G20.'},
+  {date:'2026-08-04',tag:'Quiz gate',tagtype:'gate',content:'Geometry S7+8: catch-up. Geometry Fundamentals Quiz — 80% to advance.',add:'Vocab G21.'},
   {type:'phase',label:'Phase 4 — Quant Strategy · GM Days 21–28',color:'#6c3483'},
-  {date:'2026-08-04',tag:'GM Day 21',content:'Quant Toolkit S1: Making Deductions → Piece by Piece.',add:'Vocab G22.'},
-  {date:'2026-08-05',tag:'GM Day 22',content:'Quant Toolkit S2+3: Simplifying QC → Calculating Extremes II.',add:'Vocab G23.'},
-  {date:'2026-08-06',tag:'GM Day 23',content:'Quant Toolkit S4+5: Have a System → Sufficient Information.',add:'Vocab G24.'},
-  {date:'2026-08-07',tag:'GM Day 24',content:'Quant Toolkit S6 + Mixed Practice Set 1.',add:'Vocab G25.'},
-  {date:'2026-08-08',tag:'GM Day 25',content:'Quant Toolkit S7+8 + Mixed Practice Set 2.',add:'Vocab G26.'},
-  {date:'2026-08-09',tag:'GM Day 26',content:'Time Management video + Mixed Practice Set 3.',add:'Vocab G27.'},
-  {date:'2026-08-10',tag:'GM Day 27',content:'Four Keys to High Quant + High Verbal + OG Practice Test 1 Quant (timed practice).',add:'All 27 vocab groups reviewed once.'},
-  {date:'2026-08-11',tag:'Curriculum done',tagtype:'gate',content:'Buffer / catch-up. Full error-log review of everything from Month 1.',add:'Curriculum complete. Drilling starts tomorrow.'},
+  {date:'2026-08-05',tag:'GM Day 21',content:'Quant Toolkit S1: Making Deductions → Piece by Piece.',add:'Vocab G22.'},
+  {date:'2026-08-06',tag:'GM Day 22',content:'Quant Toolkit S2+3: Simplifying QC → Calculating Extremes II.',add:'Vocab G23.'},
+  {date:'2026-08-07',tag:'GM Day 23',content:'Quant Toolkit S4+5: Have a System → Sufficient Information.',add:'Vocab G24.'},
+  {date:'2026-08-08',tag:'GM Day 24',content:'Quant Toolkit S6 + Mixed Practice Set 1.',add:'Vocab G25.'},
+  {date:'2026-08-09',tag:'GM Day 25',content:'Quant Toolkit S7+8 + Mixed Practice Set 2.',add:'Vocab G26.'},
+  {date:'2026-08-10',tag:'GM Day 26',content:'Time Management video + Mixed Practice Set 3.',add:'Vocab G27.'},
+  {date:'2026-08-11',tag:'GM Day 27',content:'Four Keys to High Quant + High Verbal + OG Practice Test 1 Quant (timed practice).',add:'All 27 vocab groups reviewed once.'},
   {type:'phase',label:'Month 2 · Week 5 — full mixed drilling',color:'#1e6b3c'},
-  {date:'2026-08-12',tag:'Drill',content:'Manhattan 5lb mixed: Arithmetic + Algebra, 35Q timed. Redo all open error-log entries.',add:'No new GregMat sessions from here. This is where the score moves.'},
+  {date:'2026-08-12',tag:'Drill',content:'Curriculum close-out: full Month 1 error-log review. Then Manhattan 5lb mixed: Arithmetic + Algebra, 35Q timed; redo all open entries.',add:'Curriculum complete. No new GregMat sessions from here; drilling starts now.'},
   {date:'2026-08-13',tag:'Drill',content:'Manhattan 5lb mixed: DA + Geometry, 35Q timed. Big Book QC mental-math, target 29/30.',add:''},
   {date:'2026-08-14',tag:'Mock',tagtype:'mock',content:'PP PLUS 1 — first ETS-accurate signal. Full conditions, AWA included.',add:'Warm-up only beforehand. No studying.'},
   {date:'2026-08-15',tag:'Review',content:'PP1 full 6-step review. Build top 3 quant + top 2 verbal leaks.',add:'Vocab: all 27 groups self-quiz.'},
@@ -757,6 +773,7 @@ state.health = state.health || [];
 state.vocab  = state.vocab  || {mastered:[],struggling:[]};
 state.awa    = state.awa    || {entries:[],template:''};
 state.notes  = state.notes  || [];
+state.carryovers = state.carryovers || [];
 
 /* ================================================================
    FIREBASE INIT (graceful — works without config too)
@@ -833,6 +850,7 @@ async function loadCloudData() {
       state.vocab  = cloud.vocab  || {mastered:[],struggling:[]};
       state.awa    = cloud.awa    || {entries:[],template:''};
       state.notes  = cloud.notes  || [];
+      state.carryovers = cloud.carryovers || [];
       _save(state);
       renderAll();
       setCloudStatus('✓ Synced', 2500);
@@ -872,8 +890,36 @@ function addDays(iso,n) {
   const d = new Date(iso+'T00:00:00'); d.setDate(d.getDate()+n);
   return d.getFullYear() + '-' + String(d.getMonth()+1).padStart(2,'0') + '-' + String(d.getDate()).padStart(2,'0');
 }
+function esc(s) {
+  return String(s == null ? '' : s)
+    .replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;')
+    .replace(/"/g,'&quot;').replace(/'/g,'&#039;');
+}
+function carryoversFor(date) {
+  return (state.carryovers || []).filter(c => c.date === date)
+    .sort((a,b) => String(a.id).localeCompare(String(b.id)));
+}
+function carryItemHTML(c) {
+  const overdue = !c.done && c.date < todayISO();
+  const moveLabel = overdue ? 'move to today' : 'move +1 day';
+  return `<div class="carry-item ${c.done?'done':''}" data-carry-id="${esc(c.id)}">
+    <button class="carry-check ${c.done?'on':''}" data-carry-check="${esc(c.id)}" title="Mark carry-over complete">${c.done?'✓':''}</button>
+    <div class="carry-main">
+      <div class="carry-meta">Carried from ${fmt(c.fromDate)}${overdue?' · overdue':''}</div>
+      <div>${esc(c.text)}</div>
+      <div class="carry-tools">
+        <button data-carry-move="${esc(c.id)}">${moveLabel}</button>
+        <button data-carry-delete="${esc(c.id)}">remove</button>
+      </div>
+    </div>
+  </div>`;
+}
+function carryListHTML(date) {
+  const items = carryoversFor(date);
+  return items.length ? `<div class="carry-list">${items.map(carryItemHTML).join('')}</div>` : '';
+}
 const planDays = PLAN.filter(p => !p.type);
-const PLAN_START = '2026-07-13';
+const PLAN_START = '2026-07-15';
 const DEFAULT_EXAM_DATE = '2026-09-04';
 
 function daysInclusive(startIso, endIso) {
@@ -933,9 +979,11 @@ function setCount() {
   else if (daysToExam > 0) label = daysToExam + ' days to exam';
   else if (daysToExam === 0) label = 'Exam is today';
   else label = 'Exam passed';
+  const openCarry = (state.carryovers || []).filter(c => !c.done).length;
   $('#countbar').innerHTML =
     `<div class="pill accent"><b>${label}</b></div>` +
     `<div class="pill"><b>${done}</b>/${planDays.length} days done</div>` +
+    `<div class="pill"><b>${openCarry}</b> carry-over${openCarry===1?'':'s'}</div>` +
     `<div class="pill"><b>${state.errors.filter(e=>!e.closed).length}</b> open errors</div>`;
 }
 
@@ -945,32 +993,47 @@ function setCount() {
 function renderToday() {
   const t = todayISO();
   const pd = planDays.find(p => p.date === t);
+  const carries = carryoversFor(t);
   let html;
   if (pd) {
     html = dayCardHTML(pd, !!state.checks[t]);
+  } else if (carries.length) {
+    html = dayCardHTML({date:t,tag:'Carry-over',content:'No fixed plan task today. Complete the carried work below.',add:''}, false, false);
   } else {
     const next = planDays.find(p => p.date > t);
     html = `<div class="empty">No scheduled task for today.${next?'<br>Next up: <b>'+fmt(next.date)+'</b> — '+next.content:''}<br><br>Rest days still count. Keep the streak honest.</div>`;
   }
   $('#todayCard').innerHTML = html;
   bindChecks($('#todayCard'));
+
+  let dueHTML = '';
+  const overdueCarry = (state.carryovers || []).filter(c => !c.done && c.date < t);
+  if (overdueCarry.length) {
+    dueHTML += '<h2 class="sec">Overdue carry-overs (' + overdueCarry.length + ')</h2>' +
+      '<div class="carry-list">' + overdueCarry.map(carryItemHTML).join('') + '</div>';
+  }
   const due = state.errors.filter(e => !e.closed && e.redo <= t);
   if (due.length) {
-    $('#todayDue').innerHTML = '<h2 class="sec">Redo due today (' + due.length + ')</h2>' + due.map(errHTML).join('');
-    bindErrBtns($('#todayDue'));
-  } else { $('#todayDue').innerHTML = ''; }
+    dueHTML += '<h2 class="sec">Redo due today (' + due.length + ')</h2>' + due.map(errHTML).join('');
+  }
+  $('#todayDue').innerHTML = dueHTML;
+  bindCarryBtns($('#todayDue'));
+  bindErrBtns($('#todayDue'));
 }
 
 /* ================================================================
    PLAN
    ================================================================ */
-function dayCardHTML(p, checked) {
+function dayCardHTML(p, checked, allowCarry=true) {
   const t = todayISO();
+  const carries = carryoversFor(p.date);
+  const fullyDone = checked && carries.every(c => c.done);
   const cls = ['day'];
-  if (checked) cls.push('done');
+  if (fullyDone) cls.push('done');
   if (p.tagtype === 'mock') cls.push('mock');
   if (p.date === t) cls.push('today');
   const tagcls = 'dtag' + (p.tagtype==='mock'?' mock':p.tagtype==='gate'?' gate':'');
+  const nextDate = addDays(p.date,1);
   return `<div class="${cls.join(' ')}" data-date="${p.date}">
     <div class="chk ${checked?'on':''}" data-check="${p.date}">
       <svg viewBox="0 0 24 24"><polyline points="4 12 10 18 20 6"/></svg></div>
@@ -978,6 +1041,8 @@ function dayCardHTML(p, checked) {
       <div class="dhead"><span class="ddate">${fmt(p.date)}</span><span class="${tagcls}">${p.tag}</span></div>
       <div class="dcontent">${p.content}</div>
       ${p.add?'<div class="dadd">'+p.add.replace(/★/g,'<b>★</b>')+'</div>':''}
+      ${allowCarry?`<div class="carry-actions"><button class="minibtn carry-add" data-carry-add="${p.date}">↪ Carry unfinished to ${fmt(nextDate)}</button></div>`:''}
+      ${carryListHTML(p.date)}
     </div></div>`;
 }
 function renderPlan() {
@@ -990,10 +1055,60 @@ function renderPlan() {
   bindChecks($('#planList'));
 }
 function bindChecks(root) {
+  if (!root) return;
   root.querySelectorAll('[data-check]').forEach(el => {
     el.onclick = () => {
       const d = el.getAttribute('data-check');
       state.checks[d] = !state.checks[d]; save(state); renderAll();
+    };
+  });
+  bindCarryBtns(root);
+}
+function bindCarryBtns(root) {
+  if (!root) return;
+  root.querySelectorAll('[data-carry-add]').forEach(btn => {
+    btn.onclick = () => {
+      const fromDate = btn.getAttribute('data-carry-add');
+      const pd = planDays.find(p => p.date === fromDate);
+      const suggested = pd ? (pd.content + (pd.add ? ' ' + pd.add : '')) : '';
+      const text = prompt('What remains unfinished? Edit this to keep only the part you want to move.', suggested);
+      if (!text || !text.trim()) return;
+      const target = addDays(fromDate,1);
+      state.carryovers = state.carryovers || [];
+      state.carryovers.push({
+        id:String(Date.now()) + Math.random().toString(16).slice(2,7),
+        fromDate:fromDate,
+        date:target,
+        text:text.trim(),
+        done:false
+      });
+      save(state); renderAll();
+    };
+  });
+  root.querySelectorAll('[data-carry-check]').forEach(btn => {
+    btn.onclick = () => {
+      const id = btn.getAttribute('data-carry-check');
+      const item = (state.carryovers || []).find(c => String(c.id) === id);
+      if (!item) return;
+      item.done = !item.done;
+      save(state); renderAll();
+    };
+  });
+  root.querySelectorAll('[data-carry-move]').forEach(btn => {
+    btn.onclick = () => {
+      const id = btn.getAttribute('data-carry-move');
+      const item = (state.carryovers || []).find(c => String(c.id) === id);
+      if (!item) return;
+      item.date = item.date < todayISO() ? todayISO() : addDays(item.date,1);
+      item.done = false;
+      save(state); renderAll();
+    };
+  });
+  root.querySelectorAll('[data-carry-delete]').forEach(btn => {
+    btn.onclick = () => {
+      const id = btn.getAttribute('data-carry-delete');
+      state.carryovers = (state.carryovers || []).filter(c => String(c.id) !== id);
+      save(state); renderAll();
     };
   });
 }
@@ -1119,6 +1234,7 @@ function doImport(file) {
     if (!inc || typeof inc !== 'object') throw 0;
     state.checks=inc.checks||{}; state.logs=inc.logs||[]; state.errors=inc.errors||[]; state.health=inc.health||[];
     state.vocab=inc.vocab||{mastered:[],struggling:[]}; state.awa=inc.awa||{entries:[],template:''}; state.notes=inc.notes||[];
+    state.carryovers=inc.carryovers||[];
     save(state); renderAll();
     $('#backupMsg').textContent = 'Imported successfully — your data is restored.';
   } catch(e) { $('#backupMsg').textContent = 'That file could not be read. Make sure it\'s a backup from this app.'; }};
@@ -1348,7 +1464,7 @@ $('#tabs').querySelectorAll('button').forEach(b => {
 $('#resetBtn').onclick = () => {
   if (confirm('Erase all data on this device? Cloud copy (if signed in) is not affected — re-open to restore from cloud.')) {
     localStorage.removeItem(KEY); state=load();
-    state.checks={}; state.logs=[]; state.errors=[]; state.health=[]; state.vocab={mastered:[],struggling:[]}; state.awa={entries:[],template:''}; state.notes=[]; save(state); renderAll();
+    state.checks={}; state.logs=[]; state.errors=[]; state.health=[]; state.vocab={mastered:[],struggling:[]}; state.awa={entries:[],template:''}; state.notes=[]; state.carryovers=[]; save(state); renderAll();
   }
 };
 
@@ -1371,6 +1487,7 @@ document.getElementById('restoreAuto').onclick = () => {
     if (b&&b.data) {
       state.checks=b.data.checks||{}; state.logs=b.data.logs||[]; state.errors=b.data.errors||[]; state.health=b.data.health||[];
       state.vocab=b.data.vocab||{mastered:[],struggling:[]}; state.awa=b.data.awa||{entries:[],template:''}; state.notes=b.data.notes||[];
+      state.carryovers=b.data.carryovers||[];
       _save(state); renderAll();
       document.getElementById('backupMsg').textContent='Restored from last auto-backup.';
       document.querySelector('[data-tab=backup]').click();
@@ -1422,10 +1539,10 @@ if(localStorage.getItem('gretracker_dark')==='1'){document.documentElement.setAt
    PHASE INDICATOR
    ================================================================ */
 var PHASES=[
-  {label:'Phase 1 — Arithmetic + Algebra',color:'#2c3e50',start:'2026-07-13',end:'2026-07-20'},
-  {label:'Phase 2 — Data Analysis',color:'#922b21',start:'2026-07-21',end:'2026-07-25'},
-  {label:'Phase 3 — Coord Geo + Geometry',color:'#1a5276',start:'2026-07-26',end:'2026-08-03'},
-  {label:'Phase 4 — Quant Strategy',color:'#6c3483',start:'2026-08-04',end:'2026-08-11'},
+  {label:'Phase 1 — Arithmetic + Algebra',color:'#2c3e50',start:'2026-07-15',end:'2026-07-22'},
+  {label:'Phase 2 — Data Analysis',color:'#922b21',start:'2026-07-23',end:'2026-07-26'},
+  {label:'Phase 3 — Coord Geo + Geometry',color:'#1a5276',start:'2026-07-27',end:'2026-08-04'},
+  {label:'Phase 4 — Quant Strategy',color:'#6c3483',start:'2026-08-05',end:'2026-08-11'},
   {label:'Month 2 — Drilling & Mocks',color:'#1e6b3c',start:'2026-08-12',end:'2026-09-02'},
   {label:'Final compressed taper',color:'#555555',start:'2026-09-03',end:'2026-09-04'},
 ];
@@ -1447,7 +1564,7 @@ function renderPhase(){
 /* ================================================================
    HEATMAP
    ================================================================ */
-var MOCK_DAYS={};['2026-08-01','2026-08-14','2026-08-27','2026-09-02'].forEach(function(d){MOCK_DAYS[d]=1;});
+var MOCK_DAYS={};['2026-08-02','2026-08-14','2026-08-27','2026-09-02'].forEach(function(d){MOCK_DAYS[d]=1;});
 function renderHeatmap(){
   var box=document.getElementById('heatmap');if(!box)return;
   var t=todayISO(),cells='',d=PLAN_START,end=getExamDate();
